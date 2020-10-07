@@ -7,3 +7,4 @@ const api = axios.create({
 
 //for call the apis in backend
 export default api
+

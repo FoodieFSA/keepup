@@ -1,7 +1,8 @@
 const isDev = process.env.NODE_ENV === 'development'
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+
 module.exports = {
-    mode: 'development',
+    mode: isDev ? 'development' : 'production',
     entry: [
         './src/index.js'
     ],
