@@ -11,6 +11,9 @@
 # production
 /build
 
+#lock file
+package-lock.json
+
 # webpack build folder
 /dist
 # misc
