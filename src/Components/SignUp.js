@@ -130,7 +130,7 @@ const SignUp = () => {
               className={classes.button}
               type="submit"
             >
-              Submit
+              Sign Up
             </Button>
           </form>
         )}
