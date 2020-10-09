@@ -67,7 +67,7 @@ const SignUp = () => {
             .required('Required')
         })}
         onSubmit={(values) => {
-          console.log(values)
+          console.log('VALUES', values)
         }}
       >
         {({ handleSubmit, handleChange, values, errors }) => (
