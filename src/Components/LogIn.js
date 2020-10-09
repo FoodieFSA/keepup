@@ -30,75 +30,63 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-const modalStyle = {
-  top: `50%`,
-  left: `50%`,
-  transform: `translate(-50%, -50%)`
-}
-
-const LogIn = () => {
+export default () => {
   const classes = useStyles()
   const [open, setOpen] = React.useState(false)
 
-  const handleModalOpen = () => {
-    setOpen(true)
-  }
+  const handleModalOpen = () => setOpen(true)
+  const handleModalClose = () => setOpen(false)
 
-  const handleModalClose = () => {
-    setOpen(false)
-  }
+  const ValidationSchema = Yup.object({
+    email: Yup.string().email('Invalid email address').required(),
+    password: Yup.string().min(8, 'Password is too short -- must be at least 8 characters').required()
+  })
 
   const body = (
-    <div id="sign-up" style={modalStyle} className={classes.paper}>
+    <div id='sign-up' className={classes.paper}>
       <Formik
+        validateOnChange={false}
         initialValues={{ email: '', password: '' }}
-        validationSchema={Yup.object({
-          email: Yup.string()
-            .email('Invalid email address')
-            .required('Required'),
-          password: Yup.string()
-            .min(8, 'Password is too short -- must be at least 8 characters')
-            .required('Required')
-        })}
+        validationSchema={ValidationSchema}
         onSubmit={(values) => {
           console.log(values)
         }}
       >
         {({ handleSubmit, handleChange, values, errors }) => (
           <form
-            className="sign-in-form"
-            autoComplete="off"
+            className='sign-in-form'
+            autoComplete='off'
             onSubmit={handleSubmit}
           >
             <TextField
-              id="standard-basic"
+              id='standard-basic'
               className={classes.root}
               InputLabelProps={{ className: classes.input }}
               InputProps={{ className: classes.input }}
-              label="Email"
-              type="email"
-              name="email"
+              label='Email'
+              type='email'
+              name='email'
               value={values.email}
               onChange={handleChange}
             />
             {errors.email}
             <TextField
-              id="standard-basic"
+              id='standard-basic'
               className={classes.root}
               InputLabelProps={{ className: classes.input }}
               InputProps={{ className: classes.input }}
-              label="Password"
-              type="password"
-              name="password"
+              label='Password'
+              type='password'
+              name='password'
               value={values.password}
               onChange={handleChange}
             />
             {errors.password}
             <Button
-              variant="contained"
-              color="primary"
+              variant='contained'
+              color='primary'
               className={classes.button}
-              type="submit"
+              type='submit'
             >
               Log In
             </Button>
@@ -110,19 +98,17 @@ const LogIn = () => {
 
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={handleModalOpen}>
+      <Button variant='contained' color='primary' onClick={handleModalOpen}>
         <Typography className={classes.text}>Log In</Typography>
       </Button>
       <Modal
         open={open}
         onClose={handleModalClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
+        aria-labelledby='simple-modal-title'
+        aria-describedby='simple-modal-description'
       >
         {body}
       </Modal>
     </div>
   )
 }
-
-export default LogIn

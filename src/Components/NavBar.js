@@ -1,15 +1,10 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu'
-import {
-  AppBar,
-  Toolbar,
-  Button,
-  IconButton,
-  Typography
-} from '@material-ui/core'
+import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core'
 import SignUp from './SignUp'
 import LogIn from './LogIn'
+import AppBarCollapse from './AppBarCollapse'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,7 +14,13 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(5)
   },
   title: {
-    flexGrow: 1
+    flexGrow: 1,
+    color: '#C0C0C0',
+    fontWeight: 'bold',
+    alignSelf: 'center'
+  },
+  appBarBackground: {
+    backgroundColor: '#4169E1'
   }
 }))
 
@@ -28,29 +29,12 @@ const NavBar = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar className={classes.appBarBackground} color='primary' position='static'>
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            style={{
-              color: '#C0C0C0',
-              fontStyle: 'italic',
-              fontWeight: 'bolder'
-            }}
-            variant="h3"
-            className={classes.title}
-          >
+          <Typography variant='h3' className={classes.title}>
             KeepUp
           </Typography>
-          <SignUp />
-          <LogIn />
+          <AppBarCollapse />
         </Toolbar>
       </AppBar>
     </div>
