@@ -8,6 +8,8 @@ import {
   IconButton,
   Typography
 } from '@material-ui/core'
+import SignUp from './SignUp'
+import LogIn from './LogIn'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,13 +44,13 @@ const NavBar = () => {
               fontStyle: 'italic',
               fontWeight: 'bolder'
             }}
-            variant="h5"
+            variant="h3"
             className={classes.title}
           >
             KeepUp
           </Typography>
-          <Button color="inherit">Sign Up</Button>
-          <Button color="inherit">Log In</Button>
+          <SignUp />
+          <LogIn />
         </Toolbar>
       </AppBar>
     </div>

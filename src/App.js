@@ -10,7 +10,6 @@ function App() {
       <NavBar />
       <header className='App-header'>
         <h1>Keep Up</h1>
-        <SignUp />
       </header>
       <Footer />
     </div>
