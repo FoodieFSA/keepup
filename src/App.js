@@ -1,11 +1,14 @@
-import React from 'react';
-import './App.css';
-import Footer from './Components/Footer';
+import React from 'react'
+import './App.css'
+import Footer from './Components/Footer'
+import NavBar from './Components/NavBar'
+import SignUp from './Components/SignUp'
 
-function App () {
+function App() {
   return (
-    <div className='App'>
-      <header className='App-header'>
+    <div className="App">
+      <NavBar />
+      <header className="App-header">
         <h1>Keep Up</h1>
       </header>
       <Footer />
