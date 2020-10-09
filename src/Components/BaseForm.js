@@ -1,4 +1,4 @@
-import React, { useState, useEffect, cloneElement } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { isClear, HandleError } from './index'
@@ -109,7 +109,6 @@ export default (props) => {
       }
     }
   }, [])
-
   if (state.dataMode === 'error') {
     return <p>Error</p>
   } else if (state.dataMode === 'insert' || state.dataMode === 'update') {
@@ -124,7 +123,7 @@ export default (props) => {
       >
         {(formProps) => (
           <form className='sign-in-form' autoComplete='off'>
-            {cloneElement(props.children, formProps)}
+            {props.children(formProps)}
             <Button
               variant='contained'
               color='primary'

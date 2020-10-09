@@ -43,3 +43,8 @@ export const isClear = (useValue) => {
     (_.isString(useValue) && useValue.length === 0) ||
     (_.isObject(useValue) && Object.keys(useValue).length === 0)
 }
+
+export const SetFormMessage = (textValue) => {
+  const useValue = textValue.replace(/_/g, ' ').replace(/\[object Object]/g, '')
+  return useValue.charAt(0).toUpperCase() + useValue.slice(1)
+}
