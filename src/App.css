@@ -47,10 +47,28 @@ body {
 }
 
 /* Footer */
-#Footer {
+#footer {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   padding: 10px;
+}
+
+/* log in */
+#log-in {
+  display: flex;
+  justify-content: center;
+}
+
+/* signup */
+#sign-up {
+  display: flex;
+  justify-content: center;
+}
+
+.sign-in-form {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
 }
