@@ -23,7 +23,7 @@ body {
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: white;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -65,10 +65,15 @@ body {
 #sign-up {
   display: flex;
   justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .sign-in-form {
-  width: 200px;
+
   display: flex;
   flex-direction: column;
 }
