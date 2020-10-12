@@ -42,7 +42,7 @@ export default () => {
     email: Yup.string().email('Invalid email address').required().label('Email'),
     password: Yup.string().min(8, 'Password is too short -- must be at least 8 characters').required().label('password')
   })
-  // TODO after user submit the forn, run this function
+  // TODO after user submit the form, run this function
   const finalCommand = () => {
     console.log('hello')
   }
@@ -52,7 +52,7 @@ export default () => {
       <BaseForm
         initialValues={{ firstName: '', lastName: '', email: '', password: '' }}
         validationSchema={ValidationSchema}
-        // fastValidation
+        fastValidation
         externalApi={{
           // TODO adding the api call for submitting data
         // initializeDocument: initializeActivity,
