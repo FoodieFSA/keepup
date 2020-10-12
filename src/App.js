@@ -1,30 +1,38 @@
-import React, { useEffect } from 'react'
-import './Styles/App.css'
-import Footer from './Components/Footer'
-import NavBar from './Components/NavBar'
-import api from '../Api'
-import axios from 'axios'
-import SignUp from './Components/SignUp'
-import LogIn from './Components/LogIn'
-function App () {
+import React, { useEffect } from "react";
+import "./Styles/App.css";
+import Footer from "./Components/Footer";
+import NavBar from "./Components/NavBar";
+import api from "../Api";
+import axios from "axios";
+import SignUp from "./Components/SignUp";
+import LogIn from "./Components/LogIn";
+import Home from "./Components/Home";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+function App() {
   const test = async () => {
-    const response = await api.post('auth/registerUser', { Email: 'abc@abc.com', Password: '12345678' })
-    console.log(response)
-  }
+    const response = await api.post("auth/registerUser", {
+      Email: "abc@abc.com",
+      Password: "12345678",
+    });
+    console.log(response);
+  };
   useEffect(() => {
-    test()
-  }, [])
+    test();
+  }, []);
   return (
-    <div className='App'>
-      <NavBar />
-      {/* <div> */}
-      {/*  body */}
-      {/* </div> */}
-      <SignUp />
-      <LogIn />
-      <Footer />
-    </div>
-  )
+    <Router>
+      <div className="App">
+        <NavBar />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/login" component={LogIn} />
+        </Switch>
+        <Footer />
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;

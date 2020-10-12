@@ -4,43 +4,48 @@
  *
  * https://medium.com/@habibmahbub/create-appbar-material-ui-responsive-like-bootstrap-1a65e8286d6f
  */
-import React from 'react'
-import { Button, MenuItem, Toolbar } from '@material-ui/core'
-import { withStyles } from '@material-ui/core/styles'
-import ButtonAppBarCollapse from './ButtonAppBarCollapse'
-import SignUp from './SignUp'
-import LogIn from './LogIn'
+import React from "react";
+import { Button, MenuItem, Toolbar } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
+import ButtonAppBarCollapse from "./ButtonAppBarCollapse";
+import SignUp from "./SignUp";
+import LogIn from "./LogIn";
+import { Link } from "react-router-dom";
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
-    position: 'absolute',
-    right: 0
+    position: "absolute",
+    right: 0,
   },
   buttonBar: {
-    [theme.breakpoints.down('xs')]: {
-      display: 'none'
+    [theme.breakpoints.down("xs")]: {
+      display: "none",
     },
-    margin: '10px',
-    marginLeft: '15px',
+    margin: "10px",
+    marginLeft: "15px",
     right: 0,
-    position: 'relative',
-    width: '100%',
-    background: 'transparent'
-  }
-})
+    position: "relative",
+    width: "100%",
+    background: "transparent",
+  },
+});
 
-const AppBarCollapse = props => (
+const AppBarCollapse = (props) => (
   <div className={props.classes.root}>
     <ButtonAppBarCollapse>
       <MenuItem>Login</MenuItem>
       <MenuItem>Signup</MenuItem>
     </ButtonAppBarCollapse>
-    <div className={props.classes.buttonBar} id='appbar-collapse'>
+    <div className={props.classes.buttonBar} id="appbar-collapse">
       {/* TODO using react-router to click on the button for the form */}
-      <Button color='inherit'>Login</Button>
-      <Button color='inherit'>Signup</Button>
+      <Link to="/login">
+        <Button color="inherit">Login</Button>
+      </Link>
+      <Link to="/signup">
+        <Button color="inherit">Signup</Button>
+      </Link>
     </div>
   </div>
-)
+);
 
-export default withStyles(styles)(AppBarCollapse)
+export default withStyles(styles)(AppBarCollapse);
