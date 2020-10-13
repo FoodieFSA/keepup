@@ -15,8 +15,19 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "standard --fix"
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "prettier --write",
+      "standard --fix",
+      "git add"
+    ],
+    "*.{css,scss,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
