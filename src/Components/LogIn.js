@@ -15,7 +15,7 @@ export default () => {
       .label('password')
   })
 
-  // TODO after user submit the form, run this function
+  // TODO after user submit the form, run this function..
   const finalCommand = () => {
     console.log('hello')
   }
