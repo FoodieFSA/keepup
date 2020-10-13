@@ -1,9 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import MenuIcon from '@material-ui/icons/Menu'
-import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core'
-import SignUp from './SignUp'
-import LogIn from './LogIn'
+import { AppBar, Toolbar, Typography } from '@material-ui/core'
 import AppBarCollapse from './AppBarCollapse'
 import { Link } from 'react-router-dom'
 

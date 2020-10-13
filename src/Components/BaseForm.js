@@ -8,7 +8,7 @@ import _ from 'lodash'
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: '10px',
-    fontWeight: 'bolder',
+    fontWeight: 'bolder'
   },
   paper: {
     position: 'absolute',
@@ -16,12 +16,11 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#282c34',
     border: '2px solid #000',
     padding: '20px',
-    outline: 'none',
-  },
-}));
+    outline: 'none'
+  }
+}))
 
 export default (props) => {
-  
   const [state, setState] = useState({})
   const classes = useStyles()
 
@@ -29,20 +28,20 @@ export default (props) => {
   const handleSubmit = (useValue, formActions) => {
     const finalRedirect = (id) => {
       if (typeof props.finalCommand === 'function') {
-        props.finalCommand(id);
+        props.finalCommand(id)
       }
-    };
+    }
 
-    const { dataMode } = useValue;
+    const { dataMode } = useValue
     if (typeof props.onSubmitTransform === 'function') {
-      useValue = props.onSubmitTransform(useValue);
+      useValue = props.onSubmitTransform(useValue)
     }
 
     if (dataMode === 'insert') {
       props.externalApi
         .insertDocument(useValue)
         .then((response) => {
-          finalRedirect(response.data.id);
+          finalRedirect(response.data.id)
         })
         .catch(HandleError)
         .finally(() => {
@@ -52,20 +51,19 @@ export default (props) => {
       props.externalApi
         .updateDocument(useValue)
         .then((response) => {
-          finalRedirect(response.data.id);
+          finalRedirect(response.data.id)
         })
         .catch(HandleError)
         .finally(() => {
           formActions.setSubmitting(false)
         })
     }
-  };
+  }
 
   const NullToEmpty = (value) => {
     if (_.isNumber(value)) {
-      return value.toString();
+      return value.toString()
     }
-
 
     return _.isNil(value) ? '' : undefined
   }
@@ -95,17 +93,17 @@ export default (props) => {
            */
           ({ data }) => {
             // console.log('beforeClone', data)
-            data.precursory = _.cloneDeep(data);
-            data.dataMode = 'update';
-            data = _.cloneDeepWith(data, NullToEmpty);
+            data.precursory = _.cloneDeep(data)
+            data.dataMode = 'update'
+            data = _.cloneDeepWith(data, NullToEmpty)
             // console.log('afterClone', data)
             ModifyInfo(data)
           }
         )
         .catch((error) => {
-          setState({ dataMode: 'error' });
-          HandleError(error);
-        });
+          setState({ dataMode: 'error' })
+          HandleError(error)
+        })
     } else {
       const data = props.initialValues
       if (
@@ -115,20 +113,20 @@ export default (props) => {
         props.externalApi
           .initializeDocument()
           .then((allResponse) => {
-            data.initialized = allResponse.data;
-            SetInsertMode(data);
+            data.initialized = allResponse.data
+            SetInsertMode(data)
           })
           .catch((error) => {
-            setState({ dataMode: 'error' });
-            HandleError(error);
-          });
+            setState({ dataMode: 'error' })
+            HandleError(error)
+          })
       } else {
-        SetInsertMode(data);
+        SetInsertMode(data)
       }
     }
-  }, []);
+  }, [])
   if (state.dataMode === 'error') {
-    return <p>Error</p>;
+    return <p>Error</p>
   } else if (state.dataMode === 'insert' || state.dataMode === 'update') {
     return (
       <Formik
@@ -154,8 +152,8 @@ export default (props) => {
           </form>
         )}
       </Formik>
-    );
+    )
   } else {
-    return <p>loading</p>;
+    return <p>loading</p>
   }
-};
+}

@@ -5,11 +5,9 @@
  * https://medium.com/@habibmahbub/create-appbar-material-ui-responsive-like-bootstrap-1a65e8286d6f
  */
 import React from 'react'
-import { Button, MenuItem, Toolbar } from '@material-ui/core'
+import { Button, MenuItem } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import ButtonAppBarCollapse from './ButtonAppBarCollapse'
-import SignUp from './SignUp'
-import LogIn from './LogIn'
 import { Link } from 'react-router-dom'
 
 const styles = (theme) => ({
