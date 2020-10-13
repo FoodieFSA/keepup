@@ -24,11 +24,13 @@ function App () {
     <Router>
       <div className='App'>
         <NavBar />
-        <Switch>
-          <Route path='/' exact component={Home} />
-          <Route path='/signup'><SignUp /></Route>
-          <Route path='/login' component={LogIn} />
-        </Switch>
+        <div id="main">
+          <Switch>
+            <Route path='/' exact component={Home} />
+            <Route path='/signup'><SignUp /></Route>
+            <Route path='/login'><LogIn /></Route>
+          </Switch>
+        </div>
         <Footer />
       </div>
     </Router>

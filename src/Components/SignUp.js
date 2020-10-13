@@ -32,9 +32,9 @@ const useStyles = makeStyles(() => ({
 
 export default () => {
   const classes = useStyles()
-  const [open, setOpen] = React.useState(false)
-  const handleModalOpen = () => setOpen(true)
-  const handleModalClose = () => setOpen(false)
+  // const [open, setOpen] = React.useState(false)
+  // const handleModalOpen = () => setOpen(true)
+  // const handleModalClose = () => setOpen(false)
 
   const ValidationSchema = Yup.object({
     firstName: Yup.string().max(15, 'Must be 15 characters or less').required().label('First Name'),
@@ -54,22 +54,22 @@ export default () => {
         validationSchema={ValidationSchema}
         fastValidation
         externalApi={{
-          // TODO adding the api call for submitting data
+        // TODO adding the api call for submitting data
         // initializeDocument: initializeActivity,
         // insertDocument: insertActivity,
         // retrieveDocument: retrieveActivity,
         // updateDocument: updateActivity
         }}
         finalCommand={finalCommand}
-        buttonText='Sign up'
+        buttonText='Sign Up'
       >
-        {formProps =>
+        {formProps => (
           <>
             <AppTextField {...formProps} label='First Name' type='text' name='firstName' />
             <AppTextField {...formProps} label='Last Name' type='text' name='lastName' />
             <AppTextField {...formProps} label='Email' type='email' name='email' />
             <AppTextField {...formProps} label='Password' type='password' name='password' />
-          </>}
+          </>)}
       </BaseForm>
     </div>
   )
@@ -88,7 +88,7 @@ export default () => {
           // updateDocument: updateActivity
         }}
         finalCommand={finalCommand}
-        buttonText='Sign up'
+        buttonText='Sign Up'
       >
         {formProps =>
           <>
