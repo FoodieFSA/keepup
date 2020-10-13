@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Button } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { isClear, HandleError } from './index';
-import { Formik } from 'formik';
+import React, { useState, useEffect } from 'react'
+import { Button } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import { isClear, HandleError } from './index'
+import { Formik } from 'formik'
+import _ from 'lodash'
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -20,8 +21,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default (props) => {
-  const [state, setState] = useState({});
-  const classes = useStyles();
+  
+  const [state, setState] = useState({})
+  const classes = useStyles()
 
   // TODO finish up the handlesubmit
   const handleSubmit = (useValue, formActions) => {
@@ -44,8 +46,8 @@ export default (props) => {
         })
         .catch(HandleError)
         .finally(() => {
-          formActions.setSubmitting(false);
-        });
+          formActions.setSubmitting(false)
+        })
     } else if (dataMode === 'update') {
       props.externalApi
         .updateDocument(useValue)
@@ -54,8 +56,8 @@ export default (props) => {
         })
         .catch(HandleError)
         .finally(() => {
-          formActions.setSubmitting(false);
-        });
+          formActions.setSubmitting(false)
+        })
     }
   };
 
@@ -64,22 +66,23 @@ export default (props) => {
       return value.toString();
     }
 
-    return _.isNil(value) ? '' : undefined;
-  };
+
+    return _.isNil(value) ? '' : undefined
+  }
   const ModifyInfo = (data) => {
     if (
       !isClear(props.onStartTransform) &&
       typeof props.onStartTransform === 'function'
     ) {
-      data = props.onStartTransform(data);
+      data = props.onStartTransform(data)
     }
-    setState(data);
-  };
+    setState(data)
+  }
   const SetInsertMode = (data) => {
-    data.precursory = _.cloneDeep(data);
-    data.dataMode = 'insert';
-    ModifyInfo(data);
-  };
+    data.precursory = _.cloneDeep(data)
+    data.dataMode = 'insert'
+    ModifyInfo(data)
+  }
 
   useEffect(() => {
     if (!isClear(props.id) && !isClear(props.externalApi)) {
@@ -96,7 +99,7 @@ export default (props) => {
             data.dataMode = 'update';
             data = _.cloneDeepWith(data, NullToEmpty);
             // console.log('afterClone', data)
-            ModifyInfo(data);
+            ModifyInfo(data)
           }
         )
         .catch((error) => {
@@ -104,7 +107,7 @@ export default (props) => {
           HandleError(error);
         });
     } else {
-      const data = props.initialValues;
+      const data = props.initialValues
       if (
         !isClear(props.externalApi) &&
         typeof props.externalApi.initializeDocument === 'function'
