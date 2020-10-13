@@ -5,11 +5,9 @@
  * https://medium.com/@habibmahbub/create-appbar-material-ui-responsive-like-bootstrap-1a65e8286d6f
  */
 import React from 'react'
-import { Button, MenuItem, Toolbar } from '@material-ui/core'
+import { Button, MenuItem } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import ButtonAppBarCollapse from './ButtonAppBarCollapse'
-import SignUp from './SignUp'
-import LogIn from './LogIn'
 import { Link } from 'react-router-dom'
 
 const styles = (theme) => ({
@@ -36,13 +34,13 @@ const AppBarCollapse = (props) => (
       <MenuItem>Login</MenuItem>
       <MenuItem>Signup</MenuItem>
     </ButtonAppBarCollapse>
-    <div className={props.classes.buttonBar} id='appbar-collapse'>
+    <div className={props.classes.buttonBar} id="appbar-collapse">
       {/* TODO using react-router to click on the button for the form */}
-      <Link to='/login'>
-        <Button color='inherit'>Login</Button>
+      <Link to="/login">
+        <Button color="inherit">Login</Button>
       </Link>
-      <Link to='/signup'>
-        <Button color='inherit'>Signup</Button>
+      <Link to="/signup">
+        <Button color="inherit">Signup</Button>
       </Link>
     </div>
   </div>

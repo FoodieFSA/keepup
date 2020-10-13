@@ -1,7 +1,5 @@
 import React from 'react'
-import { TextField, Button, Modal, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { Formik } from 'formik'
 import * as Yup from 'yup'
 import BaseForm from './BaseForm'
 import AppTextField from './AppTextField'
@@ -34,10 +32,6 @@ const useStyles = makeStyles(() => ({
 
 export default () => {
   const classes = useStyles()
-  // const [open, setOpen] = React.useState(false);
-  // const handleModalOpen = () => setOpen(true);
-  // const handleModalClose = () => setOpen(false);
-
   const ValidationSchema = Yup.object({
     email: Yup.string().email('Invalid email address').required(),
     password: Yup.string()
@@ -50,42 +44,8 @@ export default () => {
     console.log('back to home page')
   }
 
-  const body = (
-    <div id='sign-up' className={classes.paper}>
-      <BaseForm
-        initialValues={{ email: '', password: '' }}
-        validationSchema={ValidationSchema}
-        fastValidation
-        externalApi={
-          {
-            // TODO: add the API call for submitting log-in credentials
-          }
-        }
-        finalCommand={finalCommand}
-        buttonText='Log In'
-      >
-        {(formProps) => (
-          <>
-            <AppTextField
-              {...formProps}
-              label='Email'
-              type='email'
-              name='email'
-            />
-            <AppTextField
-              {...formProps}
-              label='Password'
-              type='password'
-              name='password'
-            />
-          </>
-        )}
-      </BaseForm>
-    </div>
-  )
-
   return (
-    <div id='sign-up' className={classes.paper}>
+    <div id="sign-up" className={classes.paper}>
       <BaseForm
         initialValues={{ email: '', password: '' }}
         validationSchema={ValidationSchema}
@@ -96,21 +56,21 @@ export default () => {
           }
         }
         finalCommand={finalCommand}
-        buttonText='Log In'
+        buttonText="Log In"
       >
         {(formProps) => (
           <>
             <AppTextField
               {...formProps}
-              label='Email'
-              type='email'
-              name='email'
+              label="Email"
+              type="email"
+              name="email"
             />
             <AppTextField
               {...formProps}
-              label='Password'
-              type='password'
-              name='password'
+              label="Password"
+              type="password"
+              name="password"
             />
           </>
         )}

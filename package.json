@@ -9,7 +9,8 @@
     "build-client": "webpack",
     "build-client-watch": "webpack -w",
     "build": "react-scripts build",
-    "lint": "node_modules/.bin/eslint --fix --ext .js,--ignore-path .gitignore .",
+    "lint": "eslint ./ --ignore-path .gitignore",
+    "lint-fix": "npm run lint -- --fix",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' webpack-dev-server",
     "standard-fix": "standard --fix",
     "test": "react-scripts test",
@@ -23,7 +24,7 @@
   "lint-staged": {
     "*.{js,jsx}": [
       "prettier --write",
-      "standard --fix"
+      "npm run lint-fix"
     ],
     "*.{css,scss,json,md}": [
       "prettier --write"

@@ -1,9 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import MenuIcon from '@material-ui/icons/Menu'
-import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core'
-import SignUp from './SignUp'
-import LogIn from './LogIn'
+import { AppBar, Toolbar, Typography } from '@material-ui/core'
 import AppBarCollapse from './AppBarCollapse'
 import { Link } from 'react-router-dom'
 
@@ -32,12 +29,12 @@ const NavBar = () => {
     <div className={classes.root}>
       <AppBar
         className={classes.appBarBackground}
-        color='primary'
-        position='static'
+        color="primary"
+        position="static"
       >
         <Toolbar>
-          <Link to='/'>
-            <Typography variant='h3' className={classes.title}>
+          <Link to="/">
+            <Typography variant="h3" className={classes.title}>
               KeepUp
             </Typography>
           </Link>
