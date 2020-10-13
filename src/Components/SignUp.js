@@ -1,7 +1,7 @@
-import React from 'react';
-import * as Yup from 'yup';
-import BaseForm from './BaseForm';
-import AppTextField from './AppTextField';
+import React from 'react'
+import * as Yup from 'yup'
+import BaseForm from './BaseForm'
+import AppTextField from './AppTextField'
 
 export default () => {
   const ValidationSchema = Yup.object({
@@ -21,12 +21,12 @@ export default () => {
       .min(8, 'Password is too short -- must be at least 8 characters')
       .required()
       .label('password'),
-  });
+  })
 
   // TODO after user submit the form, run this function
   const finalCommand = () => {
-    console.log('hello');
-  };
+    console.log('hello')
+  }
 
   return (
     <div className='form-page'>
@@ -77,5 +77,5 @@ export default () => {
         )}
       </BaseForm>
     </div>
-  );
-};
+  )
+}
