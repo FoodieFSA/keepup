@@ -53,27 +53,30 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 10px;
+  background-color: #3f51b5;
 }
 
-/* log in */
-#log-in {
-  display: flex;
-  justify-content: center;
-}
+/* Form */
 
-/* signup */
-#sign-up {
-  display: flex;
-  justify-content: center;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.sign-in-form {
-
+.form-page {
   display: flex;
   flex-direction: column;
+  /* justify-content: center; */
+  padding-top: 50px;
+  align-items: center;
+  min-height: 90vh;
+  background-color: #f5f5dc;
+}
+
+/* changes to the form fields (eg: size) */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  /* width: 230px; */
+}
+
+.form-title {
+  font-size: 26px;
+  font-weight: bold;
+  margin: 30px;
 }
