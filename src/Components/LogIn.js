@@ -21,38 +21,33 @@ export default () => {
   }
 
   return (
-    <div className='form-page'>
-      <div className='form-title'>Log in to your account</div>
+    <div className="form-page">
+      <div className="form-title">Log in to your account</div>
       <BaseForm
-        initialValues={{ email: '', password: '' }}
+        initialValues={{email: '', password: ''}}
         validationSchema={ValidationSchema}
         fastValidation
         externalApi={
           {
-            // TODO adding the api call for submitting data
-            // initializeDocument: initializeActivity,
-            // insertDocument: insertActivity,
-            // retrieveDocument: retrieveActivity,
-            // updateDocument: updateActivity
             // TODO: add the API call for submitting log-in credentials
           }
         }
         finalCommand={finalCommand}
-        buttonText='Log In'
+        buttonText="Log In"
       >
         {(formProps) => (
           <>
             <AppTextField
               {...formProps}
-              label='Email'
-              type='email'
-              name='email'
+              label="Email"
+              type="email"
+              name="email"
             />
             <AppTextField
               {...formProps}
-              label='Password'
-              type='password'
-              name='password'
+              label="Password"
+              type="password"
+              name="password"
             />
           </>
         )}
