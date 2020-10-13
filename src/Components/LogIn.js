@@ -12,7 +12,7 @@ export default () => {
     password: Yup.string()
       .min(8, 'Password is too short -- must be at least 8 characters')
       .required()
-      .label('password'),
+      .label('password')
   })
 
   // TODO after user submit the form, run this function
@@ -24,7 +24,7 @@ export default () => {
     <div className="form-page">
       <div className="form-title">Log in to your account</div>
       <BaseForm
-        initialValues={{email: '', password: ''}}
+        initialValues={{ email: '', password: '' }}
         validationSchema={ValidationSchema}
         fastValidation
         externalApi={

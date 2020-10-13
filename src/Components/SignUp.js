@@ -20,7 +20,7 @@ export default () => {
     password: Yup.string()
       .min(8, 'Password is too short -- must be at least 8 characters')
       .required()
-      .label('password'),
+      .label('password')
   })
 
   // TODO after user submit the form, run this function
@@ -32,7 +32,7 @@ export default () => {
     <div className="form-page">
       <div className="form-title">Create an account</div>
       <BaseForm
-        initialValues={{firstName: '', lastName: '', email: '', password: ''}}
+        initialValues={{ firstName: '', lastName: '', email: '', password: '' }}
         validationSchema={ValidationSchema}
         fastValidation
         externalApi={
