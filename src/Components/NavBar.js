@@ -1,25 +1,25 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import { AppBar, Toolbar, Typography } from '@material-ui/core'
+import {makeStyles} from '@material-ui/core/styles'
+import {AppBar, Toolbar, Typography} from '@material-ui/core'
 import AppBarCollapse from './AppBarCollapse'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   menuButton: {
-    marginRight: theme.spacing(5)
+    marginRight: theme.spacing(5),
   },
   title: {
     flexGrow: 1,
     color: '#C0C0C0',
     fontWeight: 'bold',
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   appBarBackground: {
-    backgroundColor: '#4169E1'
-  }
+    backgroundColor: '#4169E1',
+  },
 }))
 
 const NavBar = () => {

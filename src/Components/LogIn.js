@@ -1,15 +1,15 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles'
 import * as Yup from 'yup'
 import BaseForm from './BaseForm'
 import AppTextField from './AppTextField'
 
 const useStyles = makeStyles(() => ({
   root: {
-    padding: '10px 0'
+    padding: '10px 0',
   },
   input: {
-    color: 'white'
+    color: 'white',
   },
   paper: {
     position: 'absolute',
@@ -17,17 +17,17 @@ const useStyles = makeStyles(() => ({
     backgroundColor: '#282c34',
     border: '2px solid #000',
     padding: '20px',
-    outline: 'none'
+    outline: 'none',
   },
   button: {
     margin: '10px',
-    fontWeight: 'bolder'
+    fontWeight: 'bolder',
   },
   text: {
     fontSize: 'medium',
     fontStyle: 'italic',
-    fontWeight: 'bolder'
-  }
+    fontWeight: 'bolder',
+  },
 }))
 
 export default () => {
@@ -36,7 +36,7 @@ export default () => {
     email: Yup.string().email('Invalid email address').required(),
     password: Yup.string()
       .min(8, 'Password is too short -- must be at least 8 characters')
-      .required()
+      .required(),
   })
 
   // After user logs in, run this action....
@@ -47,7 +47,7 @@ export default () => {
   return (
     <div id="sign-up" className={classes.paper}>
       <BaseForm
-        initialValues={{ email: '', password: '' }}
+        initialValues={{email: '', password: ''}}
         validationSchema={ValidationSchema}
         fastValidation
         externalApi={
