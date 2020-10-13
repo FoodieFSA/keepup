@@ -21,15 +21,15 @@ function App () {
   }, [])
   return (
     <Router>
-      <div className="App">
+      <div className='App'>
         <NavBar />
-        <div id="main">
+        <div id='main'>
           <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/signup">
+            <Route path='/' exact component={Home} />
+            <Route path='/signup'>
               <SignUp />
             </Route>
-            <Route path="/login">
+            <Route path='/login'>
               <LogIn />
             </Route>
           </Switch>

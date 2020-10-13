@@ -29,12 +29,12 @@ const NavBar = () => {
     <div className={classes.root}>
       <AppBar
         className={classes.appBarBackground}
-        color="primary"
-        position="static"
+        color='primary'
+        position='static'
       >
         <Toolbar>
-          <Link to="/">
-            <Typography variant="h3" className={classes.title}>
+          <Link to='/'>
+            <Typography variant='h3' className={classes.title}>
               KeepUp
             </Typography>
           </Link>

@@ -29,8 +29,8 @@ export default () => {
   }
 
   return (
-    <div className="form-page">
-      <div className="form-title">Create an account</div>
+    <div className='form-page'>
+      <div className='form-title'>Create an account</div>
       <BaseForm
         initialValues={{ firstName: '', lastName: '', email: '', password: '' }}
         validationSchema={ValidationSchema}
@@ -45,33 +45,33 @@ export default () => {
           }
         }
         finalCommand={finalCommand}
-        buttonText="Sign Up"
+        buttonText='Sign Up'
       >
         {(formProps) => (
           <>
             <AppTextField
               {...formProps}
-              label="First Name"
-              type="text"
-              name="firstName"
+              label='First Name'
+              type='text'
+              name='firstName'
             />
             <AppTextField
               {...formProps}
-              label="Last Name"
-              type="text"
-              name="lastName"
+              label='Last Name'
+              type='text'
+              name='lastName'
             />
             <AppTextField
               {...formProps}
-              label="Email"
-              type="email"
-              name="email"
+              label='Email'
+              type='email'
+              name='email'
             />
             <AppTextField
               {...formProps}
-              label="Password"
-              type="password"
-              name="password"
+              label='Password'
+              type='password'
+              name='password'
             />
           </>
         )}

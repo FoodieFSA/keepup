@@ -23,7 +23,6 @@
   },
   "lint-staged": {
     "*.{js,jsx}": [
-      "prettier --write",
       "npm run lint-fix"
     ],
     "*.{css,scss,json,md}": [
