@@ -10,13 +10,25 @@
     "build-client-watch": "webpack -w",
     "build": "react-scripts build",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' webpack-dev-server",
+    "lint-fix": "npm run lint -- --fix",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "husky": {
     "hooks": {
-      "pre-push": "standard --fix"
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "prettier --write",
+      "npm run lint-fix",
+      "git add"
+    ],
+    "*.{css,scss,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
