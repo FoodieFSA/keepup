@@ -2,22 +2,36 @@ import {TextField} from '@material-ui/core'
 import React from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import {SetFormMessage} from './index'
+
 const useStyles = makeStyles(() => ({
   root: {
-    padding: '10px 0',
+    padding: '20px 0',
   },
   input: {
-    color: 'white',
+    color: 'black',
+  },
+  text: {
+    fontSize: 'medium',
+    fontStyle: 'italic',
+    fontWeight: 'bolder',
   },
 }))
 
-const AppTextField = (props) => {
+export default (props) => {
   const classes = useStyles()
   return (
-    <div style={{display: 'flex', flexDirection: 'column', color: 'red'}}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        color: 'red',
+      }}
+    >
       <TextField
-        id="standard-basic"
+        // id='standard-basic'
         className={classes.root}
+        InputLabelProps={{className: classes.input}}
+        InputProps={{className: classes.input}}
         InputLabelProps={{className: classes.input}}
         InputProps={{className: classes.input}}
         label={props.label}
@@ -32,4 +46,3 @@ const AppTextField = (props) => {
     </div>
   )
 }
-export default AppTextField

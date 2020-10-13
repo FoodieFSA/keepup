@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import { Button } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import { isClear, HandleError } from './index'
-import { Formik } from 'formik'
+import React, {useState, useEffect} from 'react'
+import {Button} from '@material-ui/core'
+import {makeStyles} from '@material-ui/core/styles'
+import {isClear, HandleError} from './index'
+import {Formik} from 'formik'
 import _ from 'lodash'
+
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: '10px',
-    fontWeight: 'bolder'
+    fontWeight: 'bolder',
   },
   paper: {
     position: 'absolute',
@@ -15,8 +16,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#282c34',
     border: '2px solid #000',
     padding: '20px',
-    outline: 'none'
-  }
+    outline: 'none',
+  },
 }))
 
 export default (props) => {
@@ -31,7 +32,7 @@ export default (props) => {
       }
     }
 
-    const { dataMode } = useValue
+    const {dataMode} = useValue
     if (typeof props.onSubmitTransform === 'function') {
       useValue = props.onSubmitTransform(useValue)
     }
@@ -90,7 +91,7 @@ export default (props) => {
            * @param {string} data.dataMode
            * @param {any} data.precursory
            */
-          ({ data }) => {
+          ({data}) => {
             // console.log('beforeClone', data)
             data.precursory = _.cloneDeep(data)
             data.dataMode = 'update'
@@ -100,7 +101,7 @@ export default (props) => {
           }
         )
         .catch((error) => {
-          setState({ dataMode: 'error' })
+          setState({dataMode: 'error'})
           HandleError(error)
         })
     } else {
@@ -116,7 +117,7 @@ export default (props) => {
             SetInsertMode(data)
           })
           .catch((error) => {
-            setState({ dataMode: 'error' })
+            setState({dataMode: 'error'})
             HandleError(error)
           })
       } else {
@@ -137,13 +138,13 @@ export default (props) => {
         onSubmit={handleSubmit}
       >
         {(formProps) => (
-          <form className='sign-in-form' autoComplete='off'>
+          <form className="form-container" autoComplete="off">
             {props.children(formProps)}
             <Button
-              variant='contained'
-              color='primary'
+              variant="contained"
+              color="primary"
               className={classes.button}
-              type='submit'
+              type="submit"
               onClick={formProps.handleSubmit}
             >
               {props.buttonText}
