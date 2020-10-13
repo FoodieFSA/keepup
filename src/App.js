@@ -3,9 +3,7 @@ import './Styles/App.css'
 import Footer from './Components/Footer'
 import NavBar from './Components/NavBar'
 import api from '../Api'
-import SignUp from './pages/SignUp'
-import LogIn from './pages/LogIn'
-import Home from './pages/Home'
+import { LogIn, SignUp, Home } from './pages'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 function App () {
