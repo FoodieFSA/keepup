@@ -31,8 +31,8 @@ const styles = (theme) => ({
 const AppBarCollapse = (props) => (
   <div className={props.classes.root}>
     <ButtonAppBarCollapse>
-      <MenuItem>Login</MenuItem>
-      <MenuItem>Signup</MenuItem>
+      <Link to='/login'><MenuItem>Login</MenuItem> </Link>
+      <Link to='/signup'><MenuItem>Signup</MenuItem></Link>
     </ButtonAppBarCollapse>
     <div className={props.classes.buttonBar} id='appbar-collapse'>
       {/* TODO using react-router to click on the button for the form */}
