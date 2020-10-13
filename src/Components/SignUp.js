@@ -45,7 +45,7 @@ export default () => {
           }
         }
         finalCommand={finalCommand}
-        buttonText='Sign up'
+        buttonText='Sign Up'
       >
         {(formProps) => (
           <>

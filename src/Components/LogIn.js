@@ -34,10 +34,11 @@ export default () => {
             // insertDocument: insertActivity,
             // retrieveDocument: retrieveActivity,
             // updateDocument: updateActivity
+            // TODO: add the API call for submitting log-in credentials
           }
         }
         finalCommand={finalCommand}
-        buttonText='Log in'
+        buttonText='Log In'
       >
         {(formProps) => (
           <>

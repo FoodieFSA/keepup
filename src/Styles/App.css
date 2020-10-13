@@ -7,8 +7,16 @@ body {
   font-family: 'Raleway', sans-serif;
 }
 
+/* Added some CSS here to make footer sticky. Can delete this if Mark was already working on a solution */
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#main {
+  flex: 1;
 }
 
 .App-logo {
