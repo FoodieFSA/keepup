@@ -3,7 +3,7 @@ import { Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { isClear, HandleError } from './index'
 import { Formik } from 'formik'
-
+import _ from 'lodash'
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: '10px',
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default (props) => {
-  const [state, setState] = useState({ })
+  const [state, setState] = useState({})
   const classes = useStyles()
 
   // TODO finish up the handlesubmit
@@ -37,19 +37,25 @@ export default (props) => {
     }
 
     if (dataMode === 'insert') {
-      props.externalApi.insertDocument(useValue)
+      props.externalApi
+        .insertDocument(useValue)
         .then((response) => {
           finalRedirect(response.data.id)
         })
         .catch(HandleError)
-        .finally(() => { formActions.setSubmitting(false) })
+        .finally(() => {
+          formActions.setSubmitting(false)
+        })
     } else if (dataMode === 'update') {
-      props.externalApi.updateDocument(useValue)
+      props.externalApi
+        .updateDocument(useValue)
         .then((response) => {
           finalRedirect(response.data.id)
         })
         .catch(HandleError)
-        .finally(() => { formActions.setSubmitting(false) })
+        .finally(() => {
+          formActions.setSubmitting(false)
+        })
     }
   }
 
@@ -60,13 +66,16 @@ export default (props) => {
 
     return _.isNil(value) ? '' : undefined
   }
-  const ModifyInfo = data => {
-    if (!isClear(props.onStartTransform) && typeof props.onStartTransform === 'function') {
+  const ModifyInfo = (data) => {
+    if (
+      !isClear(props.onStartTransform) &&
+      typeof props.onStartTransform === 'function'
+    ) {
       data = props.onStartTransform(data)
     }
     setState(data)
   }
-  const SetInsertMode = data => {
+  const SetInsertMode = (data) => {
     data.precursory = _.cloneDeep(data)
     data.dataMode = 'insert'
     ModifyInfo(data)
@@ -74,7 +83,8 @@ export default (props) => {
 
   useEffect(() => {
     if (!isClear(props.id) && !isClear(props.externalApi)) {
-      props.externalApi.retrieveDocument(props.id)
+      props.externalApi
+        .retrieveDocument(props.id)
         .then(
           /**
            * @param {string} data.dataMode
@@ -87,15 +97,20 @@ export default (props) => {
             data = _.cloneDeepWith(data, NullToEmpty)
             // console.log('afterClone', data)
             ModifyInfo(data)
-          })
+          }
+        )
         .catch((error) => {
           setState({ dataMode: 'error' })
           HandleError(error)
         })
     } else {
       const data = props.initialValues
-      if (!isClear(props.externalApi) && typeof props.externalApi.initializeDocument === 'function') {
-        props.externalApi.initializeDocument()
+      if (
+        !isClear(props.externalApi) &&
+        typeof props.externalApi.initializeDocument === 'function'
+      ) {
+        props.externalApi
+          .initializeDocument()
           .then((allResponse) => {
             data.initialized = allResponse.data
             SetInsertMode(data)
