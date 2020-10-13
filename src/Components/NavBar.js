@@ -5,6 +5,7 @@ import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core'
 import SignUp from './SignUp'
 import LogIn from './LogIn'
 import AppBarCollapse from './AppBarCollapse'
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,11 +30,17 @@ const NavBar = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar className={classes.appBarBackground} color='primary' position='static'>
+      <AppBar
+        className={classes.appBarBackground}
+        color='primary'
+        position='static'
+      >
         <Toolbar>
-          <Typography variant='h3' className={classes.title}>
-            KeepUp
-          </Typography>
+          <Link to='/'>
+            <Typography variant='h3' className={classes.title}>
+              KeepUp
+            </Typography>
+          </Link>
           <AppBarCollapse />
         </Toolbar>
       </AppBar>

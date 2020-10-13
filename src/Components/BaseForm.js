@@ -25,32 +25,32 @@ export default (props) => {
 
   // TODO finish up the handlesubmit
   const handleSubmit = (useValue, formActions) => {
-    // const finalRedirect = (id) => {
-    //   if (typeof props.finalCommand === 'function') {
-    //     props.finalCommand(id)
-    //   }
-    // }
-    //
-    // const { dataMode } = useValue
-    // if (typeof props.onSubmitTransform === 'function') {
-    //   useValue = props.onSubmitTransform(useValue)
-    // }
+    const finalRedirect = (id) => {
+      if (typeof props.finalCommand === 'function') {
+        props.finalCommand(id)
+      }
+    }
 
-    // if (dataMode === 'insert') {
-    //   props.externalApi.insertDocument(useValue)
-    //     .then((response) => {
-    //       finalRedirect(response.data.id)
-    //     })
-    //     .catch(HandleError)
-    //     .finally(() => { formActions.setSubmitting(false) })
-    // } else if (dataMode === 'update') {
-    //   props.externalApi.updateDocument(useValue)
-    //     .then((response) => {
-    //       finalRedirect(response.data.id)
-    //     })
-    //     .catch(HandleError)
-    //     .finally(() => { formActions.setSubmitting(false) })
-    // }
+    const { dataMode } = useValue
+    if (typeof props.onSubmitTransform === 'function') {
+      useValue = props.onSubmitTransform(useValue)
+    }
+
+    if (dataMode === 'insert') {
+      props.externalApi.insertDocument(useValue)
+        .then((response) => {
+          finalRedirect(response.data.id)
+        })
+        .catch(HandleError)
+        .finally(() => { formActions.setSubmitting(false) })
+    } else if (dataMode === 'update') {
+      props.externalApi.updateDocument(useValue)
+        .then((response) => {
+          finalRedirect(response.data.id)
+        })
+        .catch(HandleError)
+        .finally(() => { formActions.setSubmitting(false) })
+    }
   }
 
   const NullToEmpty = (value) => {
