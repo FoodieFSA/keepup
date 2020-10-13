@@ -75,18 +75,29 @@ export default () => {
   )
 
   return (
-    <div>
-      <Button variant='contained' color='primary' onClick={handleModalOpen}>
-        <Typography className={classes.text}>Sign Up</Typography>
-      </Button>
-      <Modal
-        open={open}
-        onClose={handleModalClose}
-        aria-labelledby='simple-modal-title'
-        aria-describedby='simple-modal-description'
+    <div id='sign-up' className={classes.paper}>
+      <BaseForm
+        initialValues={{ firstName: '', lastName: '', email: '', password: '' }}
+        validationSchema={ValidationSchema}
+        fastValidation
+        externalApi={{
+          // TODO adding the api call for submitting data
+          // initializeDocument: initializeActivity,
+          // insertDocument: insertActivity,
+          // retrieveDocument: retrieveActivity,
+          // updateDocument: updateActivity
+        }}
+        finalCommand={finalCommand}
+        buttonText='Sign up'
       >
-        {body}
-      </Modal>
+        {formProps =>
+          <>
+            <AppTextField {...formProps} label='First Name' type='text' name='firstName' />
+            <AppTextField {...formProps} label='Last Name' type='text' name='lastName' />
+            <AppTextField {...formProps} label='Email' type='email' name='email' />
+            <AppTextField {...formProps} label='Password' type='password' name='password' />
+          </>}
+      </BaseForm>
     </div>
   )
 }

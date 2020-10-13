@@ -6,24 +6,32 @@ import api from '../Api'
 import axios from 'axios'
 import SignUp from './Components/SignUp'
 import LogIn from './Components/LogIn'
+import Home from './Components/Home'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+
 function App () {
-  const test = async () => {
-    const response = await api.post('auth/registerUser', { Email: 'abc@abc.com', Password: '12345678' })
-    console.log(response)
-  }
-  useEffect(() => {
-    test()
-  }, [])
+  // const test = async () => {
+  //   const response = await api.post('auth/registerUser', {
+  //     Email: 'abc@abc.com',
+  //     Password: '12345678'
+  //   })
+  //   console.log(response)
+  // }
+  // useEffect(() => {
+  //   test()
+  // }, [])
   return (
-    <div className='App'>
-      <NavBar />
-      {/* <div> */}
-      {/*  body */}
-      {/* </div> */}
-      <SignUp />
-      <LogIn />
-      <Footer />
-    </div>
+    <Router>
+      <div className='App'>
+        <NavBar />
+        <Switch>
+          <Route path='/' exact component={Home} />
+          <Route path='/signup'><SignUp /></Route>
+          <Route path='/login' component={LogIn} />
+        </Switch>
+        <Footer />
+      </div>
+    </Router>
   )
 }
 
