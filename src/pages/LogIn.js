@@ -1,18 +1,10 @@
 import React from 'react'
 import * as Yup from 'yup'
-import BaseForm from './BaseForm'
-import AppTextField from './AppTextField'
+import BaseForm from '../Components/BaseForm'
+import AppTextField from '../Components/AppTextField'
 
 export default () => {
   const ValidationSchema = Yup.object({
-    firstName: Yup.string()
-      .max(15, 'Must be 15 characters or less')
-      .required()
-      .label('First Name'),
-    lastName: Yup.string()
-      .max(20, 'Must be 20 characters or less')
-      .required()
-      .label('Last Name'),
     email: Yup.string()
       .email('Invalid email address')
       .required()
@@ -30,37 +22,21 @@ export default () => {
 
   return (
     <div className='form-page'>
-      <div className='form-title'>Create an account</div>
+      <div className='form-title'>Log in to your account</div>
       <BaseForm
-        initialValues={{ firstName: '', lastName: '', email: '', password: '' }}
+        initialValues={{ email: '', password: '' }}
         validationSchema={ValidationSchema}
         fastValidation
         externalApi={
           {
-            // TODO adding the api call for submitting data
-            // initializeDocument: initializeActivity,
-            // insertDocument: insertActivity,
-            // retrieveDocument: retrieveActivity,
-            // updateDocument: updateActivity
+            // TODO: add the API call for submitting log-in credentials
           }
         }
         finalCommand={finalCommand}
-        buttonText='Sign Up'
+        buttonText='Log In'
       >
         {(formProps) => (
           <>
-            <AppTextField
-              {...formProps}
-              label='First Name'
-              type='text'
-              name='firstName'
-            />
-            <AppTextField
-              {...formProps}
-              label='Last Name'
-              type='text'
-              name='lastName'
-            />
             <AppTextField
               {...formProps}
               label='Email'

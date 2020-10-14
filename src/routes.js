@@ -1,19 +1,13 @@
 import React from 'react'
-import {Route, Switch} from 'react-router-dom'
-import SignUp from './Components/SignUp'
-import LogIn from './Components/LogIn'
-import Home from './Components/Home'
+import { Route, Switch } from 'react-router-dom'
+import { SignUp, LogIn, Home } from './pages'
 
-function Router() {
+function Router () {
   return (
     <Switch>
-      <Route path="/" exact component={Home} />
-      <Route path="/signup">
-        <SignUp />
-      </Route>
-      <Route path="/login">
-        <LogIn />
-      </Route>
+      <Route path='/signup' component={SignUp} />
+      <Route path='/login' component={LogIn} />
+      <Route path='/' exact component={Home} />
     </Switch>
   )
 }
