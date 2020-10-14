@@ -3,9 +3,8 @@ import './Styles/App.css'
 import Footer from './Components/Footer'
 import NavBar from './Components/NavBar'
 import api from '../Api'
-import { LogIn, SignUp, Home } from './pages'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
+import Routes from './routes'
 function App () {
   const test = async () => {
     const response = await api.post('auth/registerUser', {
@@ -18,23 +17,13 @@ function App () {
     test()
   }, [])
   return (
-    <Router>
-      <div className='App'>
-        <NavBar />
-        <div id='main'>
-          <Switch>
-            <Route path='/' exact component={Home} />
-            <Route path='/signup'>
-              <SignUp />
-            </Route>
-            <Route path='/login'>
-              <LogIn />
-            </Route>
-          </Switch>
-        </div>
-        <Footer />
+    <div className="App">
+      <NavBar />
+      <div id="main">
+        <Routes />
       </div>
-    </Router>
+      <Footer />
+    </div>
   )
 }
 
