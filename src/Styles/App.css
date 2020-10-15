@@ -15,10 +15,6 @@ body {
   min-height: 100vh;
 }
 
-#main {
-  flex: 1;
-}
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
