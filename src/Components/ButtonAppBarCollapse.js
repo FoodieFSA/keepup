@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import { Menu } from '@material-ui/core'
 import IconButton from '@material-ui/core/IconButton'

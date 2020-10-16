@@ -4,7 +4,6 @@
  *
  * https://medium.com/@habibmahbub/create-appbar-material-ui-responsive-like-bootstrap-1a65e8286d6f
  */
-import React from 'react'
 import { Button, MenuItem } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import ButtonAppBarCollapse from './ButtonAppBarCollapse'
