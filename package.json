@@ -5,6 +5,9 @@
   "private": true,
   "main": "index.js",
   "author": "keepup team",
+  "engines": {
+    "node": "~12.11.1"
+  },
   "scripts": {
     "build-client": "webpack",
     "build-client-watch": "webpack -w",
