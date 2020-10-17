@@ -1,4 +1,3 @@
-import React from 'react'
 import * as Yup from 'yup'
 import BaseForm from '../Components/BaseForm'
 import AppTextField from '../Components/AppTextField'
