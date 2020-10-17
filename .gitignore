@@ -15,7 +15,8 @@
 package-lock.json
 
 # webpack build folder
-/dist
+/public
+
 # misc
 .DS_Store
 .env.local
