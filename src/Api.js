@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { serverUrl } from './env.json'
+import { serverUrl } from '../env.json'
 
 const api = axios.create({
   baseURL: serverUrl
