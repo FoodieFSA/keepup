@@ -56,9 +56,6 @@
     "redux-thunk": "^2.3.0",
     "yup": "^0.29.3"
   },
-  "eslintConfig": {
-    "extends": "wesbos"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
