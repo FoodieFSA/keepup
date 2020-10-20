@@ -1,14 +1,14 @@
 const isDev = process.env.NODE_ENV === 'development'
-const HtmlWebPackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: isDev ? 'development' : 'production',
   entry: [
+    '@babel/polyfill', // enables async-await
     './src/index.js'
   ],
   output: {
     path: __dirname,
-    filename: './dist/bundle.js'
+    filename: './public/bundle.js'
   },
   resolve: {
     extensions: ['.js', '.jsx']
@@ -40,14 +40,5 @@ module.exports = {
         ]
       }
     ]
-  },
-  devServer: {
-    historyApiFallback: { index: './public/index.html' }
-  },
-  plugins: [
-    new HtmlWebPackPlugin({
-      template: './public/index.html',
-      filename: './index.html'
-    })
-  ]
+  }
 }
