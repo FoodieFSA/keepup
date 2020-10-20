@@ -19,7 +19,7 @@ export default () => {
     password: Yup.string()
       .min(8, 'Password is too short -- must be at least 8 characters')
       .required()
-      .label('password')
+      .label('Password')
   })
 
   // TODO after user submit the form, run this function
