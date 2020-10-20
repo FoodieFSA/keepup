@@ -1,7 +1,6 @@
-import React from 'react'
 import * as Yup from 'yup'
-import BaseForm from './BaseForm'
-import AppTextField from './AppTextField'
+import BaseForm from '../Components/BaseForm'
+import AppTextField from '../Components/AppTextField'
 
 export default () => {
   const ValidationSchema = Yup.object({
