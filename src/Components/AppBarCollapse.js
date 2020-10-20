@@ -50,7 +50,7 @@ const AppBarCollapse = (props) => (
         <Button color="inherit">Login</Button>
       </Link>
       <Link to="/signup">
-        x<Button color="inherit">Signup</Button>
+        <Button color="inherit">Signup</Button>
       </Link>
     </div>
   </div>
