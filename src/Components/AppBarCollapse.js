@@ -32,7 +32,7 @@ const AppBarCollapse = (props) => (
   <div className={props.classes.root}>
     <ButtonAppBarCollapse>
       <Link to="/login">
-        <MenuItem>Login</MenuItem>{' '}
+        <MenuItem>Login</MenuItem>
       </Link>
       <Link to="/signup">
         <MenuItem>Signup</MenuItem>
@@ -50,7 +50,7 @@ const AppBarCollapse = (props) => (
         <Button color="inherit">Login</Button>
       </Link>
       <Link to="/signup">
-        <Button color="inherit">Signup</Button>
+        x<Button color="inherit">Signup</Button>
       </Link>
     </div>
   </div>
