@@ -1,7 +1,7 @@
 import * as Yup from 'yup'
 import BaseForm from '../Components/BaseForm'
 import AppTextField from '../Components/AppTextField'
-
+import Api from '../Api'
 export default () => {
   const ValidationSchema = Yup.object({
     firstName: Yup.string()
@@ -26,6 +26,12 @@ export default () => {
   const finalCommand = () => {
     console.log('hello')
   }
+  const signUp = async (payload) => {
+    console.log(payload)
+    const result = await Api.post('auth/registerUser', payload)
+    console.log(result)
+    return result
+  }
 
   return (
     <div className='form-page'>
@@ -38,7 +44,7 @@ export default () => {
           {
             // TODO adding the api call for submitting data
             // initializeDocument: initializeActivity,
-            // insertDocument: insertActivity,
+            insertDocument: signUp
             // retrieveDocument: retrieveActivity,
             // updateDocument: updateActivity
           }
