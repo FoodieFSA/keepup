@@ -1,13 +1,14 @@
-import { Route, Switch } from 'react-router-dom'
+import { withRouter, Route, Switch } from 'react-router'
 import { SignUp, LogIn, Home } from './pages'
 
-function Router () {
+function Router (props) {
+  console.log(props.location)
   return (
     <Switch>
+      <Route exact path='/' component={Home} />
       <Route path='/signup' component={SignUp} />
       <Route path='/login' component={LogIn} />
-      <Route path='/' exact component={Home} />
     </Switch>
   )
 }
-export default Router
+export default withRouter(Router)

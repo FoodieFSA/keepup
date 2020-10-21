@@ -14,8 +14,8 @@
 #lock file
 package-lock.json
 
-public/bundle.js
-public/bundle.js.map
+/public/bundle.js
+/public/bundle.js.map
 
 # misc
 .DS_Store

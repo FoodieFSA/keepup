@@ -1,8 +1,10 @@
 import * as Yup from 'yup'
 import BaseForm from '../Components/BaseForm'
 import AppTextField from '../Components/AppTextField'
-import Api from '../Api'
-export default () => {
+import { auth } from '../store/user'
+import { connect } from 'react-redux'
+
+const SignUp = ({ registerUser, history }) => {
   const ValidationSchema = Yup.object({
     firstName: Yup.string()
       .max(15, 'Must be 15 characters or less')
@@ -23,14 +25,10 @@ export default () => {
   })
 
   // TODO after user submit the form, run this function
-  const finalCommand = () => {
-    console.log('hello')
-  }
-  const signUp = async (payload) => {
-    console.log(payload)
-    const result = await Api.post('auth/registerUser', payload)
-    console.log(result)
-    return result
+  const finalCommand = (id) => {
+    console.log(id, '...............')
+    console.log(history)
+    history.push('/')
   }
 
   return (
@@ -44,7 +42,7 @@ export default () => {
           {
             // TODO adding the api call for submitting data
             // initializeDocument: initializeActivity,
-            insertDocument: signUp
+            insertDocument: registerUser
             // retrieveDocument: retrieveActivity,
             // updateDocument: updateActivity
           }
@@ -84,3 +82,10 @@ export default () => {
     </div>
   )
 }
+const mapDispatch = (dispatch) => {
+  return {
+    registerUser: (payload) => dispatch(auth(payload, 'registerUser'))
+  }
+}
+
+export default connect(null, mapDispatch)(SignUp)
