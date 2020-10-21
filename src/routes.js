@@ -1,4 +1,4 @@
-import { withRouter, Route, Switch } from 'react-router'
+import { withRouter, Route, Switch } from 'react-router-dom'
 import { SignUp, LogIn, Home } from './pages'
 
 function Router (props) {

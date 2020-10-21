@@ -24,12 +24,7 @@ const SignUp = ({ registerUser, history }) => {
       .label('password')
   })
 
-  // TODO after user submit the form, run this function
-  const finalCommand = (id) => {
-    console.log(id, '...............')
-    console.log(history)
-    history.push('/')
-  }
+  const finalCommand = (id) => history.push('/')
 
   return (
     <div className='form-page'>
@@ -40,11 +35,7 @@ const SignUp = ({ registerUser, history }) => {
         fastValidation
         externalApi={
           {
-            // TODO adding the api call for submitting data
-            // initializeDocument: initializeActivity,
             insertDocument: registerUser
-            // retrieveDocument: retrieveActivity,
-            // updateDocument: updateActivity
           }
         }
         finalCommand={finalCommand}

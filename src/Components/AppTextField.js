@@ -36,6 +36,7 @@ const AppTextField = (props) => {
         name={props.name}
         value={props.values[props.name]}
         onChange={props.handleChange}
+        autoComplete={props.name}
       />
       {props.name in props.errors
         ? SetFormMessage(props.errors[props.name])
