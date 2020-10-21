@@ -1,7 +1,7 @@
-import {Route, Switch} from 'react-router-dom'
-import {SignUp, LogIn, Home, WorkoutLog} from './pages'
+import { Route, Switch } from 'react-router-dom'
+import { SignUp, LogIn, Home, WorkoutLog } from './pages'
 
-function Router() {
+function Router () {
   return (
     <Switch>
       <Route path="/workout-log" component={WorkoutLog} />
