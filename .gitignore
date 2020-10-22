@@ -14,8 +14,9 @@
 #lock file
 package-lock.json
 
-# webpack build folder
-/dist
+public/bundle.js
+public/bundle.js.map
+
 # misc
 .DS_Store
 .env.local
