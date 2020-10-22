@@ -1,8 +1,9 @@
 import { withRouter, Route, Switch } from 'react-router-dom'
 import { SignUp, LogIn, Home } from './pages'
-
-function Router (props) {
-  console.log(props.location)
+import { connect } from 'react-redux'
+function Router ({ isLoggedIn, location }) {
+  console.log(isLoggedIn, location)
+  // TODO  use the IsLoggedIn to restrict user for different route
   return (
     <Switch>
       <Route exact path='/' component={Home} />
@@ -11,4 +12,9 @@ function Router (props) {
     </Switch>
   )
 }
-export default withRouter(Router)
+const mapState = (state) => {
+  return {
+    isLoggedIn: !!state.user.id
+  }
+}
+export default withRouter(connect(mapState, null)(Router))
