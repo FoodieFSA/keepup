@@ -1,7 +1,7 @@
 import * as Yup from 'yup'
 import BaseForm from '../Components/BaseForm'
 import AppTextField from '../Components/AppTextField'
-import { auth } from '../store/user'
+import { auth } from '../store'
 import { connect } from 'react-redux'
 
 const SignUp = ({ registerUser, history, error }) => {
