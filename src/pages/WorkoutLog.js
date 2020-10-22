@@ -75,7 +75,7 @@ const WorkoutLog = () => {
 
               resolve()
             }, 1000)
-          }),
+          })
       }}
     />
   )
