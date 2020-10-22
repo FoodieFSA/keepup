@@ -1,5 +1,6 @@
+
 import { withRouter, Route, Switch } from 'react-router-dom'
-import { SignUp, LogIn, Home } from './pages'
+import { SignUp, LogIn, Home, Error } from './pages'
 import { connect } from 'react-redux'
 function Router ({ isLoggedIn, location }) {
   console.log(isLoggedIn, location)
@@ -9,6 +10,7 @@ function Router ({ isLoggedIn, location }) {
       <Route exact path='/' component={Home} />
       <Route path='/signup' component={SignUp} />
       <Route path='/login' component={LogIn} />
+      <Route component={Error} />
     </Switch>
   )
 }

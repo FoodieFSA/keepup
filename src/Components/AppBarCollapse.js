@@ -8,7 +8,9 @@ import { Button, MenuItem } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import ButtonAppBarCollapse from './ButtonAppBarCollapse'
 import { Link } from 'react-router-dom'
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import { connect } from 'react-redux'
+
 const styles = (theme) => ({
   root: {
     position: 'absolute',
@@ -29,22 +31,31 @@ const styles = (theme) => ({
 
 const AppBarCollapse = ({ classes, isLoggedIn }) => {
   // TODO use the isLoggedIn to display different Link
-  console.log('user is loggin: ', isLoggedIn)
-  return (<div className={classes.root}>
-    <ButtonAppBarCollapse>
-      <Link to='/login'><MenuItem>Login</MenuItem> </Link>
-      <Link to='/signup'><MenuItem>Signup</MenuItem></Link>
-    </ButtonAppBarCollapse>
-    <div className={classes.buttonBar} id='appbar-collapse'>
+  console.log('user is logging: ', isLoggedIn)
+  return (
+    <div className={classes.root}>
+      <ButtonAppBarCollapse>
+        <Link to="/login">
+          <MenuItem>Login</MenuItem>
+        </Link>
+        <Link to="/signup">
+          <MenuItem>Signup</MenuItem>
+        </Link>
+      </ButtonAppBarCollapse>
       {/* TODO using react-router to click on the button for the form */}
-      <Link to='/login'>
-        <Button color='inherit'>Login</Button>
+      <Link to="/workout-log">
+        <Button color="inherit">
+          <AddCircleOutlineIcon />
+          Add Workout Log
+        </Button>
       </Link>
-      <Link to='/signup'>
-        <Button color='inherit'>Signup</Button>
+      <Link to="/login">
+        <Button color="inherit">Login</Button>
+      </Link>
+      <Link to="/signup">
+        <Button color="inherit">Signup</Button>
       </Link>
     </div>
-  </div>
   )
 }
 const mapState = (state) => {
