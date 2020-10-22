@@ -41,20 +41,28 @@ const AppBarCollapse = ({ classes, isLoggedIn }) => {
         <Link to="/signup">
           <MenuItem>Signup</MenuItem>
         </Link>
+        <Link to="/workout-log">
+          <Button color="inherit">
+            <AddCircleOutlineIcon />
+            Add Workout Log
+          </Button>
+        </Link>
       </ButtonAppBarCollapse>
-      {/* TODO using react-router to click on the button for the form */}
-      <Link to="/workout-log">
-        <Button color="inherit">
-          <AddCircleOutlineIcon />
-          Add Workout Log
-        </Button>
-      </Link>
-      <Link to="/login">
-        <Button color="inherit">Login</Button>
-      </Link>
-      <Link to="/signup">
-        <Button color="inherit">Signup</Button>
-      </Link>
+      <div className={classes.buttonBar} id="appbar-collapse">
+        {/* TODO using react-router to click on the button for the form */}
+        <Link to="/workout-log">
+          <Button color="inherit">
+            <AddCircleOutlineIcon />
+            Add Workout Log
+          </Button>
+        </Link>
+        <Link to="/login">
+          <Button color="inherit">Login</Button>
+        </Link>
+        <Link to="/signup">
+          <Button color="inherit">Signup</Button>
+        </Link>
+      </div>
     </div>
   )
 }
