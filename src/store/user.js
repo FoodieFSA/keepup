@@ -1,5 +1,4 @@
 import Api from '../Api'
-import history from '../history'
 /**
  * ACTION TYPES
  */
@@ -34,9 +33,9 @@ export const auth = (payload, method) => async dispatch => {
   try {
     res = await Api.post(`/auth/${method}`, payload)
   } catch (authError) {
-    return dispatch(getUser({ error: authError }))
+    dispatch(getUser({ error: authError.response.data.error }))
+    return throw new Error('user exists');
   }
-  console.log(res, 'in store')
   try {
     dispatch(getUser(res.data))
     return res

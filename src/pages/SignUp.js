@@ -4,7 +4,7 @@ import AppTextField from '../Components/AppTextField'
 import { auth } from '../store/user'
 import { connect } from 'react-redux'
 
-const SignUp = ({ registerUser, history }) => {
+const SignUp = ({ registerUser, history, error }) => {
   const ValidationSchema = Yup.object({
     firstName: Yup.string()
       .max(15, 'Must be 15 characters or less')
@@ -29,6 +29,7 @@ const SignUp = ({ registerUser, history }) => {
   return (
     <div className='form-page'>
       <div className='form-title'>Create an account</div>
+      <span style={{ color: 'red' }}>{error}</span>
       <BaseForm
         initialValues={{ firstName: '', lastName: '', email: '', password: '' }}
         validationSchema={ValidationSchema}
@@ -73,10 +74,15 @@ const SignUp = ({ registerUser, history }) => {
     </div>
   )
 }
+const mapState = (state) => {
+  return {
+    error: state.user.error
+  }
+}
 const mapDispatch = (dispatch) => {
   return {
     registerUser: (payload) => dispatch(auth(payload, 'registerUser'))
   }
 }
 
-export default connect(null, mapDispatch)(SignUp)
+export default connect(mapState, mapDispatch)(SignUp)
