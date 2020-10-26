@@ -1,98 +1,44 @@
-import * as Yup from 'yup'
-import BaseForm from '../Components/BaseForm'
-import AppTextField from '../Components/AppTextField'
+// import {useState} from 'react'
 
 function UserProfile () {
-  /*
-  firstname
-  lastname
-  gender
-  age
-  height
-  weight
+  // let [myProfile, setMyProfile] = useState({})
+  // let [firstName, setFirstName] = useState('')
+  // let [lastName, setLastName] = useState('')
+  // let [age, setAge] = useState(0)
+  // let [height, setHeight] = useState('')
+  // let [weight, setWeight] = useState('')
 
-  */
-  const ValidationSchema = Yup.object({
-    firstName: Yup.string()
-      .max(15, 'Must be 15 characters or less')
-      .required()
-      .label('First Name'),
-    lastName: Yup.string()
-      .max(20, 'Must be 20 characters or less')
-      .required()
-      .label('Last Name'),
-    gender: Yup.mixed()
-      .oneOf(['Male', 'Female', 'Prefer not to say'])
-      .required()
-      .label('Gender'),
-    age: Yup.number().required().label('Age'),
-    height: Yup.number().required().label('Height'),
-    weight: Yup.number().required().label('Weight')
-  })
+  // TODO: back-end call to retrieve user data from the db (axios?)
 
-  // TODO after user submit the form, run this function
-  const finalCommand = () => {
-    console.log('hello')
-  }
-
-  // TODO: decide if we should have password, address, exp level field
   return (
-    <div id="user-profile-page" className="form-page">
-      <BaseForm
-        initialValues={{
-          firstName: '',
-          lastName: '',
-          gender: '',
-          age: '',
-          height: '',
-          weight: ''
-        }}
-        validationSchema={ValidationSchema}
-        fastValidation
-        externalApi={
-          {
-            // TODO: add the API call for submitting log-in credentials
-          }
-        }
-        finalCommand={finalCommand}
-        buttonText="Submit"
-      >
-        {(formProps) => (
-          <>
-            <AppTextField
-              {...formProps}
-              label="First Name"
-              type="text"
-              name="firstName"
-            />
-            <AppTextField
-              {...formProps}
-              label="Last Name"
-              type="text"
-              name="lastName"
-            />
-            <AppTextField
-              {...formProps}
-              label="Gender"
-              type="gender"
-              name="gender"
-            />
-            <AppTextField {...formProps} label="Age" type="age" name="age" />
-            <AppTextField
-              {...formProps}
-              label="Height"
-              type="height"
-              name="height"
-            />
-            <AppTextField
-              {...formProps}
-              label="Weight"
-              type="weight"
-              name="weight"
-            />
-          </>
-        )}
-      </BaseForm>
+    <div id="user-profile-page">
+      <div>
+        <h1> My Profile Page </h1>
+      </div>
+      <div>
+        <img
+          src="https://www.edmundsgovtech.com/wp-content/uploads/2020/01/default-picture_0_0.png"
+          style={{ height: '200px', width: '200px' }}
+        />
+      </div>
+      <div className="user-profile-info">
+        <div>First Name</div>
+      </div>
+      <div className="user-profile-info">
+        <div>Last Name</div>
+      </div>
+      <div className="user-profile-info">
+        <div>Email</div>
+      </div>
+      <div className="user-profile-info">
+        <div>Age / DOB</div>
+      </div>
+      <div className="user-profile-info">
+        <div>Height</div>
+      </div>
+      <div className="user-profile-info">
+        <div>Weight</div>
+      </div>
     </div>
   )
 }

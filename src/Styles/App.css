@@ -57,7 +57,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-  background-color: #3f51b5;
+  /* background-color: #3f51b5; */
 }
 
 /* Form */
@@ -83,4 +83,29 @@ body {
   font-size: 26px;
   font-weight: bold;
   margin: 30px;
+}
+
+/* user profile page */
+
+#user-profile-page {
+  min-height: 85vh;
+  padding: 20px;
+  /* background-image: url('http://www.maurilioamorim.com/wp-content/uploads/2011/05/fitness.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; */
+}
+
+/* #user-profile-page::before {
+  position: absolute;
+  text-align: none;
+  content: '';
+  z-index: -1;
+  height: 50vh;
+  background-image: url('http://www.maurilioamorim.com/wp-content/uploads/2011/05/fitness.jpg');
+  background-repeat: no-repeat;
+} */
+
+.user-profile-info {
+  margin: 20px;
 }
