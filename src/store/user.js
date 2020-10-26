@@ -34,7 +34,7 @@ export const auth = (payload, method) => async dispatch => {
     res = await Api.post(`/auth/${method}`, payload)
   } catch (authError) {
     dispatch(getUser({ error: authError.response.data.error }))
-    return throw new Error('user exists');
+    return throw new Error(authError.response.data.error);
   }
   try {
     dispatch(getUser(res.data))

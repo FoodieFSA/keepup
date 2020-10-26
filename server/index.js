@@ -48,7 +48,7 @@ const createApp = () => {
 
 const startListening = () => {
   // start listening (and create a 'server' object representing our server)
-  app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`))
+  app.listen(PORT, () => console.log('Mixing it up on port ' + `http://127.0.0.1:${PORT}`))
 }
 
 async function bootApp () {
