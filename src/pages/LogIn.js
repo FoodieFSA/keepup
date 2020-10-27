@@ -1,8 +1,10 @@
 import * as Yup from 'yup'
 import BaseForm from '../Components/BaseForm'
 import AppTextField from '../Components/AppTextField'
+import { auth } from '../store'
+import { connect } from 'react-redux'
 
-export default () => {
+const Login = ({ loginUser, error, history }) => {
   const ValidationSchema = Yup.object({
     email: Yup.string()
       .email('Invalid email address')
@@ -14,14 +16,12 @@ export default () => {
       .label('password')
   })
 
-  // TODO after user submit the form, run this function
-  const finalCommand = () => {
-    console.log('hello')
-  }
+  const finalCommand = () => history.push('/')
 
   return (
-    <div className='form-page'>
+    <div className="form-page">
       <div className='form-title'>Log in to your account</div>
+      <span style={{ color: 'red' }}>{error}</span>
       <BaseForm
         initialValues={{ email: '', password: '' }}
         validationSchema={ValidationSchema}
@@ -29,6 +29,7 @@ export default () => {
         externalApi={
           {
             // TODO: add the API call for submitting log-in credentials
+            insertDocument: loginUser
           }
         }
         finalCommand={finalCommand}
@@ -54,3 +55,11 @@ export default () => {
     </div>
   )
 }
+const mapState = (state) => ({ error: state.user.error })
+const mapDispatch = (dispatch) => {
+  return {
+    loginUser: (payload) => dispatch(auth(payload, 'loginUser'))
+  }
+}
+
+export default connect(mapState, mapDispatch)(Login)

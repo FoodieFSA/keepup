@@ -24,7 +24,6 @@ export default (props) => {
   const [state, setState] = useState({})
   const classes = useStyles()
 
-  // TODO finish up the handlesubmit
   const handleSubmit = (useValue, formActions) => {
     const finalRedirect = (id) => {
       if (typeof props.finalCommand === 'function') {
@@ -41,20 +40,22 @@ export default (props) => {
       props.externalApi
         .insertDocument(useValue)
         .then((response) => {
+          formActions.setSubmitting(false)
           finalRedirect(response.data.id)
         })
-        .catch(HandleError)
-        .finally(() => {
+        .catch((error) => {
+          HandleError(error)
           formActions.setSubmitting(false)
         })
     } else if (dataMode === 'update') {
       props.externalApi
         .updateDocument(useValue)
         .then((response) => {
+          formActions.setSubmitting(false)
           finalRedirect(response.data.id)
         })
-        .catch(HandleError)
-        .finally(() => {
+        .catch((error) => {
+          HandleError(error)
           formActions.setSubmitting(false)
         })
     }
@@ -106,10 +107,7 @@ export default (props) => {
         })
     } else {
       const data = props.initialValues
-      if (
-        !isClear(props.externalApi) &&
-        typeof props.externalApi.initializeDocument === 'function'
-      ) {
+      if (!isClear(props.externalApi) && typeof props.externalApi.initializeDocument === 'function') {
         props.externalApi
           .initializeDocument()
           .then((allResponse) => {
@@ -125,6 +123,7 @@ export default (props) => {
       }
     }
   }, [])
+
   if (state.dataMode === 'error') {
     return <p>Error</p>
   } else if (state.dataMode === 'insert' || state.dataMode === 'update') {

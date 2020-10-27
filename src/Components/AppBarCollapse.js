@@ -9,6 +9,7 @@ import { withStyles } from '@material-ui/core/styles'
 import ButtonAppBarCollapse from './ButtonAppBarCollapse'
 import { Link } from 'react-router-dom'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
+import { connect } from 'react-redux'
 
 const styles = (theme) => ({
   root: {
@@ -28,32 +29,46 @@ const styles = (theme) => ({
   }
 })
 
-const AppBarCollapse = (props) => (
-  <div className={props.classes.root}>
-    <ButtonAppBarCollapse>
-      <Link to="/login">
-        <MenuItem>Login</MenuItem>
-      </Link>
-      <Link to="/signup">
-        <MenuItem>Signup</MenuItem>
-      </Link>
-    </ButtonAppBarCollapse>
-    <div className={props.classes.buttonBar} id="appbar-collapse">
-      {/* TODO using react-router to click on the button for the form */}
-      <Link to="/workout-log">
-        <Button color="inherit">
-          <AddCircleOutlineIcon />
-          Add Workout Log
-        </Button>
-      </Link>
-      <Link to="/login">
-        <Button color="inherit">Login</Button>
-      </Link>
-      <Link to="/signup">
-        <Button color="inherit">Signup</Button>
-      </Link>
+const AppBarCollapse = ({ classes, isLoggedIn }) => {
+  // TODO use the isLoggedIn to display different Link
+  console.log('user is logging: ', isLoggedIn)
+  return (
+    <div className={classes.root}>
+      <ButtonAppBarCollapse>
+        <Link to="/login">
+          <MenuItem>Login</MenuItem>
+        </Link>
+        <Link to="/signup">
+          <MenuItem>Signup</MenuItem>
+        </Link>
+        <Link to="/workout-log">
+          <Button color="inherit">
+            <AddCircleOutlineIcon />
+            Add Workout Log
+          </Button>
+        </Link>
+      </ButtonAppBarCollapse>
+      <div className={classes.buttonBar} id="appbar-collapse">
+        {/* TODO using react-router to click on the button for the form */}
+        <Link to="/workout-log">
+          <Button color="inherit">
+            <AddCircleOutlineIcon />
+            Add Workout Log
+          </Button>
+        </Link>
+        <Link to="/login">
+          <Button color="inherit">Login</Button>
+        </Link>
+        <Link to="/signup">
+          <Button color="inherit">Signup</Button>
+        </Link>
+      </div>
     </div>
-  </div>
-)
-
-export default withStyles(styles)(AppBarCollapse)
+  )
+}
+const mapState = (state) => {
+  return {
+    isLoggedIn: !!state.user.id
+  }
+}
+export default connect(mapState, null)(withStyles(styles)(AppBarCollapse))
