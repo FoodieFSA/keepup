@@ -1,14 +1,24 @@
-// import {useState} from 'react'
+import { useState, useEffect } from 'react'
+import produce from 'immer'
 
 function UserProfile () {
-  // let [myProfile, setMyProfile] = useState({})
-  // let [firstName, setFirstName] = useState('')
-  // let [lastName, setLastName] = useState('')
-  // let [age, setAge] = useState(0)
-  // let [height, setHeight] = useState('')
-  // let [weight, setWeight] = useState('')
-
+  const [state, setState] = useState({ counter: 0, ticks: 10 })
   // TODO: back-end call to retrieve user data from the db (axios?)
+
+  useEffect(() => {
+    // TODO: fetch self user data and make it the state
+  }, [])
+
+  const handleOnClick = () => {
+    console.log('hit handle click')
+    setState(
+      produce((draftState) => {
+        // will only change specific fields listed, produce keeps copy of the old object
+        draftState.counter = state.counter + 1
+      })
+    )
+    // setState({counter: state.counter + 1})
+  }
 
   return (
     <div id="user-profile-page">
@@ -39,6 +49,10 @@ function UserProfile () {
       <div className="user-profile-info">
         <div>Weight</div>
       </div>
+
+      <button onClick={handleOnClick}>Button</button>
+      <p>Counter: {state.counter}</p>
+      <p>Ticks: {state.ticks}</p>
     </div>
   )
 }

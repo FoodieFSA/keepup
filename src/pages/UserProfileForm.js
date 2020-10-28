@@ -8,7 +8,7 @@ function UserProfileForm () {
   firstname
   lastname
   gender
-  age
+  dob
   height
   weight
   */
@@ -25,7 +25,7 @@ function UserProfileForm () {
       .oneOf(['Male', 'Female', 'Prefer not to say'])
       .required()
       .label('Gender'),
-    age: Yup.number().required().label('Age'),
+    dob: Yup.date().required().label('dob'),
     height: Yup.number().required().label('Height'),
     weight: Yup.number().required().label('Weight')
   })
@@ -33,6 +33,7 @@ function UserProfileForm () {
   // TODO after user submit the form, run this function
   const finalCommand = () => {
     console.log('hello')
+    // TODO: update user info
   }
 
   // TODO: decide if we should have password, address, exp level field
@@ -43,7 +44,7 @@ function UserProfileForm () {
           firstName: '',
           lastName: '',
           gender: '',
-          age: '',
+          dob: '',
           height: '',
           weight: ''
         }}
@@ -55,7 +56,7 @@ function UserProfileForm () {
           }
         }
         finalCommand={finalCommand}
-        buttonText="Submit"
+        buttonText="Update Profile"
       >
         {(formProps) => (
           <>
@@ -72,14 +73,18 @@ function UserProfileForm () {
               name="lastName"
             />
             <FormControl>
-              <InputLabel htmlFor="age-native-simple">Gender</InputLabel>
+              <InputLabel
+                shrink
+                id="demo-simple-select-placeholder-label-label"
+              >
+                Gender
+              </InputLabel>
               <Select
                 native
-                inputProps={{
-                  name: 'gender',
-                  id: 'gender-native-simple'
-                }}
-                // TODO: Need to change color from grey to black
+                label="Gender"
+                name="gender"
+                defaultValue={''}
+                // TODO: Need to change color from grey to white
               >
                 <option aria-label="None" value="" />
                 <option value="Male">Male</option>
@@ -89,25 +94,31 @@ function UserProfileForm () {
             </FormControl>
 
             <AppTextField
-              {...formProps}
               // not sure if we are doing age groups
-              label="Age"
-              type="age"
-              name="age"
+              {...formProps}
+              label="DOB"
+              type="date"
+              name="dob"
             />
             <AppTextField
               {...formProps}
               // height ranges? or options
-              label="Height"
+              label="Height (cm)"
               type="height"
               name="height"
+              InputLabelProps={{
+                shrink: true
+              }}
             />
             <AppTextField
               {...formProps}
               // weight ranges or options?
-              label="Weight"
+              label="Weight (lbs)"
               type="weight"
               name="weight"
+              InputLabelProps={{
+                shrink: true
+              }}
             />
           </>
         )}
