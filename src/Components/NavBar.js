@@ -32,7 +32,7 @@ const NavBar = () => {
         position='static'
       >
         <Toolbar>
-          <Link to='/'>
+          <Link to="/">
             <Typography variant='h3' className={classes.title}>
               KeepUp
             </Typography>

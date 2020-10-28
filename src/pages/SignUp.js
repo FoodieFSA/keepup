@@ -1,10 +1,10 @@
 import * as Yup from 'yup'
 import BaseForm from '../Components/BaseForm'
 import AppTextField from '../Components/AppTextField'
+import { auth } from '../store'
+import { connect } from 'react-redux'
 
-import { withRouter } from 'react-router-dom'
-
-const SignUp = ({ history }) => {
+const SignUp = ({ registerUser, history, error }) => {
   const ValidationSchema = Yup.object({
     firstName: Yup.string()
       .max(15, 'Must be 15 characters or less')
@@ -24,30 +24,19 @@ const SignUp = ({ history }) => {
       .label('Password')
   })
 
-  // TODO after user submit the form, run this function
-  const finalCommand = () => {
-    console.log('hello')
-
-    // redirect to setup page
-    history.push('/user-profile-setup')
-  }
-
+  const finalCommand = (id) => history.push('/')
+  // history.push('/user-profile-setup')
   return (
     <div className="form-page">
       <div className="form-title">Create an account</div>
+      <span style={{ color: 'red' }}>{error}</span>
       <BaseForm
         initialValues={{ firstName: '', lastName: '', email: '', password: '' }}
         validationSchema={ValidationSchema}
         fastValidation
-        externalApi={
-          {
-            // TODO adding the api call for submitting data
-            // initializeDocument: initializeActivity,
-            // insertDocument: insertActivity,
-            // retrieveDocument: retrieveActivity,
-            // updateDocument: updateActivity
-          }
-        }
+        externalApi={{
+          insertDocument: registerUser
+        }}
         finalCommand={finalCommand}
         buttonText="Sign Up"
       >
@@ -83,5 +72,15 @@ const SignUp = ({ history }) => {
     </div>
   )
 }
+const mapState = (state) => {
+  return {
+    error: state.user.error
+  }
+}
+const mapDispatch = (dispatch) => {
+  return {
+    registerUser: (payload) => dispatch(auth(payload, 'registerUser'))
+  }
+}
 
-export default withRouter(SignUp)
+export default connect(mapState, mapDispatch)(SignUp)
