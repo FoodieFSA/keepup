@@ -9,7 +9,7 @@ function Router ({ isLoggedIn, location }) {
       <Route exact path="/" component={Home} />
       <Route path="/signup" component={SignUp} />
       <Route path="/login" component={LogIn} />
-      <Route path="/user-profile-setup" component={UserProfileForm} />
+      <Route path="/user-profile-update" component={UserProfileForm} />
       <Route path="/user-profile" component={UserProfile} />
       <Route component={Error} />
     </Switch>
