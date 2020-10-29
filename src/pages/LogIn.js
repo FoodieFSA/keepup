@@ -13,41 +13,39 @@ const Login = ({ loginUser, error, history }) => {
     password: Yup.string()
       .min(8, 'Password is too short -- must be at least 8 characters')
       .required()
-      .label('password')
+      .label('Password')
   })
 
   const finalCommand = () => history.push('/')
 
   return (
     <div className="form-page">
-      <div className='form-title'>Log in to your account</div>
+      <div className="form-title">Log in to your account</div>
       <span style={{ color: 'red' }}>{error}</span>
       <BaseForm
         initialValues={{ email: '', password: '' }}
         validationSchema={ValidationSchema}
         fastValidation
-        externalApi={
-          {
-            // TODO: add the API call for submitting log-in credentials
-            insertDocument: loginUser
-          }
-        }
+        externalApi={{
+          // TODO: add the API call for submitting log-in credentials
+          insertDocument: loginUser
+        }}
         finalCommand={finalCommand}
-        buttonText='Log In'
+        buttonText="Log In"
       >
         {(formProps) => (
           <>
             <AppTextField
               {...formProps}
-              label='Email'
-              type='email'
-              name='email'
+              label="Email"
+              type="email"
+              name="email"
             />
             <AppTextField
               {...formProps}
-              label='Password'
-              type='password'
-              name='password'
+              label="Password"
+              type="password"
+              name="password"
             />
           </>
         )}

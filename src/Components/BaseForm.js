@@ -137,13 +137,13 @@ export default (props) => {
         onSubmit={handleSubmit}
       >
         {(formProps) => (
-          <form className='form-container' autoComplete='off'>
+          <form className="form-container" autoComplete="off">
             {props.children(formProps)}
             <Button
-              variant='contained'
-              color='primary'
+              variant="contained"
+              color="primary"
               className={classes.button}
-              type='submit'
+              type="submit"
               onClick={formProps.handleSubmit}
             >
               {props.buttonText}

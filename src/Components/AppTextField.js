@@ -29,7 +29,7 @@ const AppTextField = (props) => {
       <TextField
         // id='standard-basic'
         className={classes.root}
-        InputLabelProps={{ className: classes.input }}
+        InputLabelProps={{ className: classes.input, shrink: true }}
         InputProps={{ className: classes.input }}
         label={props.label}
         type={props.type}
