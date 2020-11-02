@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import produce from 'immer'
 
-function UserProfile () {
+const UserProfile = () => {
   const [state, setState] = useState({ counter: 0, ticks: 10 })
   // TODO: back-end call to retrieve user data from the db (axios?)
 
