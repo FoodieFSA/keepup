@@ -44,7 +44,6 @@ const WorkoutLog = () => {
   }
 
   const addNewExercise = () => {
-    console.log(state)
     setState(
       produce((draftState) => {
         draftState.exerciseSets.push({...initialExercise})
