@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import {Button} from '@material-ui/core'
 import produce from 'immer'
 import SingleExercise from '../Components/SingleExercise'
