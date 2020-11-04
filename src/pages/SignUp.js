@@ -25,7 +25,7 @@ const SignUp = ({ registerUser, history, error }) => {
   })
 
   const finalCommand = (id) => history.push('/')
-  // history.push('/user-profile-setup')
+
   return (
     <div className="form-page">
       <div className="form-title">Create an account</div>
