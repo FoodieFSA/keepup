@@ -1,5 +1,5 @@
 import { withRouter, Route, Switch } from 'react-router-dom'
-import { SignUp, LogIn, Home, Error, UserProfile, UserProfileForm } from './pages'
+import { SignUp, LogIn, Home, Error, UserProfile, UserProfileForm } from '../pages'
 import { connect } from 'react-redux'
 function Router ({ isLoggedIn, location }) {
   console.log(isLoggedIn, location)
@@ -9,8 +9,12 @@ function Router ({ isLoggedIn, location }) {
       <Route exact path="/" component={Home} />
       <Route path="/signup" component={SignUp} />
       <Route path="/login" component={LogIn} />
-      <Route path="/user-profile-update" component={UserProfileForm} />
-      <Route path="/user-profile" component={UserProfile} />
+      {isLoggedIn &&
+      <Switch>
+        <Route path="/user-profile-update" component={UserProfileForm}/>
+        <Route path="/user-profile" component={UserProfile} />
+      </Switch>
+      }
       <Route component={Error} />
     </Switch>
   )
