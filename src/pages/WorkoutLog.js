@@ -1,5 +1,5 @@
-import {useState} from 'react'
-import {Button} from '@material-ui/core'
+import { useState } from 'react'
+import { Button } from '@material-ui/core'
 import produce from 'immer'
 import SingleExercise from '../Components/SingleExercise'
 
@@ -9,13 +9,15 @@ const WorkoutLog = () => {
     set: 1,
     LBS: 0,
     reps: 0,
-    complete: false,
+    complete: false
   }
 
   const [state, setState] = useState({
     workoutLogName: 'MONDAY WORKOUT',
-    exerciseSets: [],
+    exerciseSets: []
   })
+
+  const columnHeader = ['Exercise', 'Set', 'LBS', 'Reps', 'Complete']
 
   const handleExerciseChange = (
     exerciseId,
@@ -46,29 +48,42 @@ const WorkoutLog = () => {
   const addNewExercise = () => {
     setState(
       produce((draftState) => {
-        draftState.exerciseSets.push({...initialExercise})
+        draftState.exerciseSets.push({ ...initialExercise })
       })
     )
   }
 
   return (
-    <div>
-      <h2>{state.workoutLogName}</h2>
-      {state.exerciseSets.map((exercise, index) => {
-        return (
-          <SingleExercise
-            key={index}
-            exerciseId={index}
-            exercise={exercise}
-            handleExerciseChange={handleExerciseChange}
-          />
-        )
-      })}
+    <>
+      <h2 id="workoutlog-title">{state.workoutLogName}</h2>
+      <table id="table">
+        <thead>
+          <tr>
+            {columnHeader.map((columnName, index) => {
+              return <th key={index}>{columnName.toUpperCase()}</th>
+            })}
+          </tr>
+        </thead>
 
-      <Button variant="contained" color="primary" onClick={addNewExercise}>
-        Add a New Exercise
-      </Button>
-    </div>
+        <tbody>
+          {state.exerciseSets &&
+            state.exerciseSets.map((exercise, index) => {
+              return (
+                <SingleExercise
+                  key={index}
+                  exerciseId={index}
+                  exercise={exercise}
+                  handleExerciseChange={handleExerciseChange}
+                />
+              )
+            })}
+        </tbody>
+
+        <Button variant="contained" color="primary" onClick={addNewExercise}>
+          Add a New Exercise
+        </Button>
+      </table>
+    </>
   )
 }
 
