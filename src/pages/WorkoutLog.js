@@ -17,8 +17,6 @@ const WorkoutLog = () => {
     exerciseSets: []
   })
 
-  const columnHeader = ['Exercise', 'Set', 'LBS', 'Reps', 'Complete']
-
   const handleExerciseChange = (
     exerciseId,
     incomingExerciseName,
@@ -54,19 +52,9 @@ const WorkoutLog = () => {
   }
 
   return (
-    <>
+    <div >
       <h2 id="workoutlog-title">{state.workoutLogName}</h2>
-      <table id="table">
-        <thead>
-          <tr>
-            {columnHeader.map((columnName, index) => {
-              return <th key={index}>{columnName.toUpperCase()}</th>
-            })}
-          </tr>
-        </thead>
-
-        <tbody>
-          {state.exerciseSets &&
+      {state.exerciseSets &&
             state.exerciseSets.map((exercise, index) => {
               return (
                 <SingleExercise
@@ -76,14 +64,13 @@ const WorkoutLog = () => {
                   handleExerciseChange={handleExerciseChange}
                 />
               )
-            })}
-        </tbody>
-
-        <Button variant="contained" color="primary" onClick={addNewExercise}>
+            })
+      }
+      <Button variant="contained" color="primary" onClick={addNewExercise}>
           Add a New Exercise
-        </Button>
-      </table>
-    </>
+      </Button>
+
+    </div>
   )
 }
 
