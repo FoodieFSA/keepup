@@ -19,3 +19,7 @@ An application to keep track of workout and find your gym buddies!
 - [React](https://reactjs.org/)
 - [React-Readux](https://react-redux.js.org/)
 - [Material-UI](https://material-ui.com/)
+
+## Deployment
+
+The project currently host in the firebase. Please visit [Demo](https://keekup-5ad5b.web.app).
