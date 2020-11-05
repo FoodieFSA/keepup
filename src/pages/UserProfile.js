@@ -1,60 +1,59 @@
-import { useState, useEffect } from 'react'
-import produce from 'immer'
+import { connect } from 'react-redux'
 
-const UserProfile = () => {
-  const [state, setState] = useState({ counter: 0, ticks: 10 })
-  // TODO: back-end call to retrieve user data from the db (axios?)
-
-  useEffect(() => {
-    // TODO: fetch self user data and make it the state
-  }, [])
-
+function UserProfile ({ user, history }) {
   const handleOnClick = () => {
-    console.log('hit handle click')
-    setState(
-      produce((draftState) => {
-        // will only change specific fields listed, produce keeps copy of the old object
-        draftState.counter = state.counter + 1
-      })
-    )
-    // setState({counter: state.counter + 1})
+    history.push('/user-profile-update')
   }
 
-  return (
-    <div id="user-profile-page">
-      <div>
-        <h1> My Profile Page </h1>
-      </div>
-      <div>
-        <img
-          src="https://www.edmundsgovtech.com/wp-content/uploads/2020/01/default-picture_0_0.png"
-          style={{ height: '200px', width: '200px' }}
-        />
-      </div>
-      <div className="user-profile-info">
-        <div>First Name</div>
-      </div>
-      <div className="user-profile-info">
-        <div>Last Name</div>
-      </div>
-      <div className="user-profile-info">
-        <div>Email</div>
-      </div>
-      <div className="user-profile-info">
-        <div>Age / DOB</div>
-      </div>
-      <div className="user-profile-info">
-        <div>Height</div>
-      </div>
-      <div className="user-profile-info">
-        <div>Weight</div>
-      </div>
+  if (Object.keys(user).length === 0) {
+    history.push('/error')
+  }
 
-      <button onClick={handleOnClick}>Button</button>
-      <p>Counter: {state.counter}</p>
-      <p>Ticks: {state.ticks}</p>
+  const userData = user.userData
+
+  return (
+    <div>
+      {Object.keys(user).length ? (
+        <div id="user-profile-page">
+          <div>
+            <h1> My Profile Page </h1>
+          </div>
+          <div>
+            <img
+              src="https://www.edmundsgovtech.com/wp-content/uploads/2020/01/default-picture_0_0.png"
+              style={{ height: '200px', width: '200px' }}
+            />
+          </div>
+          <div className="user-profile-info">
+            <div>{userData.first_name || 'First Name Unavailable'}</div>
+          </div>
+          <div className="user-profile-info">
+            <div>{userData.last_name || 'Last Name Unavailable'}</div>
+          </div>
+          <div className="user-profile-info">
+            <div>{userData.email || 'Email Unavailable'}</div>
+          </div>
+          <div className="user-profile-info">
+            <div>{userData.user_dob || 'Dob Unavailable'}</div>
+          </div>
+          <div className="user-profile-info">
+            <div>{userData.user_height || 'Height Unavailable'}</div>
+          </div>
+          <div className="user-profile-info">
+            <div>{userData.user_weight || 'Weight Unavailable'}</div>
+          </div>
+          <div className="user-profile-info">
+            <div>{userData.user_gender || 'Height Unavailable'}</div>
+          </div>
+          <button onClick={() => handleOnClick()}>Update Profile</button>
+        </div>
+      ) : null}
     </div>
   )
 }
 
-export default UserProfile
+const mapStateToProps = (state) => {
+  return { user: state.user }
+}
+
+export default connect(mapStateToProps, null)(UserProfile)
