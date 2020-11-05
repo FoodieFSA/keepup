@@ -9,7 +9,7 @@ body {
 
 /* Added some CSS here to make footer sticky. Can delete this if Mark was already working on a solution */
 .App {
-  text-align: center;
+  /* text-align: center; */
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -108,6 +108,7 @@ body {
 
 .user-profile-info {
   margin: 20px;
+  font-size: 20px;
 }
 
 /* CSS for Workout Log */
