@@ -13,13 +13,13 @@ const defaultUser = {}
 /**
  * ACTION CREATORS
  */
-const getUser = user => ({ type: GET_USER, user })
+const getUser = (user) => ({ type: GET_USER, user })
 const removeUser = () => ({ type: REMOVE_USER })
 
 /**
  * THUNK CREATORS
  */
-export const me = () => async dispatch => {
+export const me = () => async (dispatch) => {
   try {
     const res = await Api.get('/auth/me')
     dispatch(getUser(res.data || defaultUser))
@@ -28,13 +28,13 @@ export const me = () => async dispatch => {
   }
 }
 
-export const auth = (payload, method) => async dispatch => {
+export const auth = (payload, method) => async (dispatch) => {
   let res
   try {
     res = await Api.post(`/auth/${method}`, payload)
   } catch (authError) {
     dispatch(getUser({ error: authError.response.data.error }))
-    return throw new Error(authError.response.data.error);
+    return throw new Error(authError.response.data.error)
   }
   try {
     dispatch(getUser(res.data))
@@ -44,7 +44,7 @@ export const auth = (payload, method) => async dispatch => {
   }
 }
 
-export const logout = () => async dispatch => {
+export const logout = () => async (dispatch) => {
   try {
     await Api.post('/auth/logout')
     dispatch(removeUser())

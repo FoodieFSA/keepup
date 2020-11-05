@@ -35,6 +35,9 @@ const AppBarCollapse = ({ classes, isLoggedIn }) => {
   return (
     <div className={classes.root}>
       <ButtonAppBarCollapse>
+        <Link to="/user-profile">
+          <MenuItem>Profile</MenuItem>
+        </Link>
         <Link to="/login">
           <MenuItem>Login</MenuItem>
         </Link>
@@ -55,6 +58,10 @@ const AppBarCollapse = ({ classes, isLoggedIn }) => {
             <AddCircleOutlineIcon />
             Add Workout Log
           </Button>
+        </Link>
+
+        <Link to="/user-profile">
+          <Button color="inherit">Profile</Button>
         </Link>
         <Link to="/login">
           <Button color="inherit">Login</Button>
