@@ -5,6 +5,7 @@ a {
 
 body {
   font-family: 'Raleway', sans-serif;
+  flex-grow: 1;
 }
 
 /* Added some CSS here to make footer sticky. Can delete this if Mark was already working on a solution */
@@ -122,6 +123,7 @@ body {
 #table {
   border-collapse: collapse;
   border: 3px solid #ddd;
+  width: 100%;
 }
 
 #table td,
