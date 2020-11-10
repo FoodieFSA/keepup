@@ -26,7 +26,7 @@ function UserProfile ({ user, history }) {
     return <p>loading</p>
   }
   return (
-    <div id='user-profile-page'>
+    <div id="user-profile-page">
       <h1> My Profile Page </h1>
       <div
         style={{
@@ -36,51 +36,56 @@ function UserProfile ({ user, history }) {
         }}
       >
         <img
-          src='https://cdn.patch.com/assets/layout/contribute/user-default.png'
+          src="https://cdn.patch.com/assets/layout/contribute/user-default.png"
           style={{
             height: '400px',
             width: '400px',
             borderRadius: '50%'
           }}
         />
-        <div>
-          <div className='user-profile-info'>
+        <div style={{ paddingTop: '40px' }}>
+          <div className="user-profile-info">
             <h3>
               <span>Name: </span>
               {userData.first_name + ' ' + userData.last_name}
             </h3>
           </div>
-          <div className='user-profile-info'>
+          <div className="user-profile-info">
             <h3>
               <span>Email: </span>
               {userData.email || 'Email Unavailable'}
             </h3>
           </div>
-          <div className='user-profile-info'>
+          <div className="user-profile-info">
             <h3>
               <span>DOB: </span>
               {userData.user_dob || 'Dob Unavailable'}
             </h3>
           </div>
-          <div className='user-profile-info'>
+          <div className="user-profile-info">
             <h3>
               <span>Height: </span>
               {userData.user_height || 'Height Unavailable'}
             </h3>
           </div>
-          <div className='user-profile-info'>
+          <div className="user-profile-info">
             <h3>
               <span>Weight: </span>
               {userData.user_weight || 'Weight Unavailable'}
             </h3>
           </div>
-          <div className='user-profile-info'>
+          <div className="user-profile-info">
             <h3>
               <span>Gender: </span>
               {userData.user_gender || 'Height Unavailable'}
             </h3>
           </div>
-          <Button variant='contained' color='primary' onClick={handleOnClick}>
+          <Button
+            style={{ marginLeft: '25px' }}
+            variant="contained"
+            color="primary"
+            onClick={handleOnClick}
+          >
             Update Profile
           </Button>
         </div>
