@@ -1,13 +1,13 @@
 import { Checkbox, Button } from '@material-ui/core'
 
 const SingleExercise = ({ exercise, handleExerciseChange, exerciseId, addNewSet }) => {
-  const columnHeader = ['Set', 'lbs/KG', 'repetition', 'Complete']
+  const columnHeader = ['Set', 'lbs', 'repetition', 'Complete']
   const toggleComplete = (setId, isComplete) => { handleExerciseChange(exerciseId, setId, null, null, null, null, !isComplete) }
 
   return (
     <>
       <h2 style={{ textAlign: 'left', paddingLeft: '5%' }}>{exercise[0].exerciseName}</h2>
-      <table style={{ width: '100%', paddingLeft: '5%', paddingRight: '5%' }}>
+      <table style={{ width: '100vw', paddingLeft: '5%', paddingRight: '5%' }}>
         <thead>
           <tr>
             {columnHeader.map((columnName, index) => {
