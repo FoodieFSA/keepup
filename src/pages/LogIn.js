@@ -27,7 +27,6 @@ const Login = ({ loginUser, error, history }) => {
         validationSchema={ValidationSchema}
         fastValidation
         externalApi={{
-          // TODO: add the API call for submitting log-in credentials
           insertDocument: loginUser
         }}
         finalCommand={finalCommand}

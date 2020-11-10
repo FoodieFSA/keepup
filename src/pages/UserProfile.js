@@ -6,23 +6,7 @@ function UserProfile ({ user, history }) {
   const handleOnClick = () => {
     history.push('/user-profile-update')
   }
-
-  // TODO covert back when it is using real data
-  // const userData = user.userData
-
-  // TODO  using loading https://github.com/danilowoz/react-content-loader
-  const userData = {
-    first_name: 'abc',
-    last_name: 'sdsd',
-    email: '',
-    user_dob: '',
-    user_height: 150,
-    user_weight: 140,
-    user_gender: 'Prefer not to say'
-  }
-
-  console.log(userData)
-  if (isClear(userData)) {
+  if (isClear(user)) {
     return <p>loading</p>
   }
   return (
@@ -47,37 +31,37 @@ function UserProfile ({ user, history }) {
           <div className="user-profile-info">
             <h3>
               <span>Name: </span>
-              {userData.first_name + ' ' + userData.last_name}
+              {user.first_name + ' ' + user.last_name}
             </h3>
           </div>
           <div className="user-profile-info">
             <h3>
               <span>Email: </span>
-              {userData.email || 'Email Unavailable'}
+              {user.email || 'Email Unavailable'}
             </h3>
           </div>
           <div className="user-profile-info">
             <h3>
               <span>DOB: </span>
-              {userData.user_dob || 'Dob Unavailable'}
+              {user.user_dob || 'Dob Unavailable'}
             </h3>
           </div>
           <div className="user-profile-info">
             <h3>
               <span>Height: </span>
-              {userData.user_height || 'Height Unavailable'}
+              {user.user_height || 'Height Unavailable'}
             </h3>
           </div>
           <div className="user-profile-info">
             <h3>
               <span>Weight: </span>
-              {userData.user_weight || 'Weight Unavailable'}
+              {user.user_weight || 'Weight Unavailable'}
             </h3>
           </div>
           <div className="user-profile-info">
             <h3>
               <span>Gender: </span>
-              {userData.user_gender || 'Height Unavailable'}
+              {user.user_gender || 'Height Unavailable'}
             </h3>
           </div>
           <Button
@@ -95,7 +79,7 @@ function UserProfile ({ user, history }) {
 }
 
 const mapStateToProps = (state) => {
-  return { user: state.user }
+  return { user: state.user.userData }
 }
 
 export default connect(mapStateToProps, null)(UserProfile)

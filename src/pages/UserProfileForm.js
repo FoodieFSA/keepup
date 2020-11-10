@@ -2,8 +2,27 @@ import * as Yup from 'yup'
 import BaseForm from '../Components/BaseForm'
 import AppTextField from '../Components/AppTextField'
 import { FormControl, Select, InputLabel } from '@material-ui/core'
+import { connect } from 'react-redux'
+import { useState } from 'react'
+import produce from 'immer'
+import api from '../Api'
+function UserProfileForm ({ userId }) {
+  const [state, setState] = useState({
+    first_name: '',
+    last_name: '',
+    user_gender: '',
+    user_dob: '',
+    user_height: '',
+    user_weight: '',
+    isLoading: true
+  })
 
-function UserProfileForm () {
+  const onStartTransform = (data) => {
+    setState(produce(draftState => {
+      draftState.isLoading = false
+    }))
+    return data
+  }
   /*
   firstname
   lastname
@@ -35,26 +54,24 @@ function UserProfileForm () {
     console.log('hello')
     // TODO: update user info
   }
-
+  if (state.isLoading) {
+    return <p>loading</p>
+  }
   // TODO: decide if we should have password, address, exp level field
   return (
     <div id="user-profile-form" className="form-page">
       <BaseForm
-        initialValues={{
-          firstName: '',
-          lastName: '',
-          gender: '',
-          dob: '',
-          height: '',
-          weight: ''
-        }}
+        initialValues={state}
         validationSchema={ValidationSchema}
         fastValidation
         externalApi={
           {
             // TODO: add the API call for submitting log-in credentials
+            retrieveDocument: (id) => api.get(`user/getUser?id=${id}`)
           }
         }
+        id={userId}
+        onStartTransform={onStartTransform}
         finalCommand={finalCommand}
         buttonText="Update Profile"
       >
@@ -64,13 +81,13 @@ function UserProfileForm () {
               {...formProps}
               label="First Name"
               type="text"
-              name="firstName"
+              name="first_name"
             />
             <AppTextField
               {...formProps}
               label="Last Name"
               type="text"
-              name="lastName"
+              name="last_name"
             />
             <FormControl>
               <InputLabel
@@ -82,8 +99,8 @@ function UserProfileForm () {
               <Select
                 native
                 label="Gender"
-                name="gender"
-                defaultValue={''}
+                name="user_gender"
+                value={formProps.values.user_gender}
                 // TODO: Need to change color from grey to white
               >
                 <option aria-label="None" value="" />
@@ -98,14 +115,14 @@ function UserProfileForm () {
               {...formProps}
               label="DOB"
               type="date"
-              name="dob"
+              name="user_dob"
             />
             <AppTextField
               {...formProps}
               // height ranges? or options
               label="Height (cm)"
               type="height"
-              name="height"
+              name="user_height"
               InputLabelProps={{
                 shrink: true
               }}
@@ -115,7 +132,7 @@ function UserProfileForm () {
               // weight ranges or options?
               label="Weight (lbs)"
               type="weight"
-              name="weight"
+              name="user_weight"
               InputLabelProps={{
                 shrink: true
               }}
@@ -126,5 +143,8 @@ function UserProfileForm () {
     </div>
   )
 }
+const mapState = (state) => {
+  return { userId: state.user.userData.id }
+}
 
-export default UserProfileForm
+export default connect(mapState, null)(UserProfileForm)

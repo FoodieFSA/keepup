@@ -73,6 +73,7 @@ export default (props) => {
       !isClear(props.onStartTransform) &&
       typeof props.onStartTransform === 'function'
     ) {
+      console.log(data, '........')
       data = props.onStartTransform(data)
     }
     setState(data)
@@ -84,7 +85,7 @@ export default (props) => {
   }
 
   useEffect(() => {
-    if (!isClear(props.id) && !isClear(props.externalApi)) {
+    if (!isClear(props.id) && !isClear(props.externalApi) && typeof props.externalApi.retrieveDocument === 'function') {
       props.externalApi
         .retrieveDocument(props.id)
         .then(
@@ -97,7 +98,7 @@ export default (props) => {
             data.precursory = _.cloneDeep(data)
             data.dataMode = 'update'
             data = _.cloneDeepWith(data, NullToEmpty)
-            // console.log('afterClone', data)
+            console.log('afterClone', data)
             ModifyInfo(data)
           }
         )
