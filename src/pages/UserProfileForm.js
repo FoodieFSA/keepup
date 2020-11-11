@@ -7,7 +7,6 @@ import { useState } from 'react'
 // import produce from 'immer'
 import api from '../Api'
 function UserProfileForm ({ userId }) {
-  console.log(userId, '................')
   const [state, setState] = useState({
     first_name: '',
     last_name: '',

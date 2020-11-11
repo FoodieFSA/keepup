@@ -73,7 +73,6 @@ export default (props) => {
       !isClear(props.onStartTransform) &&
       typeof props.onStartTransform === 'function'
     ) {
-      console.log(data, '........')
       data = props.onStartTransform(data)
     }
     setState(data)
@@ -98,7 +97,7 @@ export default (props) => {
             data.precursory = _.cloneDeep(data)
             data.dataMode = 'update'
             data = _.cloneDeepWith(data, NullToEmpty)
-            console.log('afterClone', data)
+            // console.log('afterClone', data)
             ModifyInfo(data)
           }
         )
