@@ -1,4 +1,5 @@
 import Api from '../Api'
+import Storage from '../Storage'
 /**
  * ACTION TYPES
  */
@@ -8,7 +9,7 @@ const REMOVE_USER = 'REMOVE_USER'
 /**
  * INITIAL STATE
  */
-const defaultUser = {}
+const defaultUser = { }
 
 /**
  * ACTION CREATORS
@@ -36,6 +37,7 @@ export const auth = (payload, method) => async (dispatch) => {
     dispatch(getUser({ error: authError.response.data.error }))
     return throw new Error(authError.response.data.error)
   }
+  Storage.saveToken(res.data.accessToken)
   try {
     dispatch(getUser(res.data))
     return res

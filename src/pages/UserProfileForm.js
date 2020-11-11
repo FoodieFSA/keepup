@@ -4,23 +4,21 @@ import AppTextField from '../Components/AppTextField'
 import { FormControl, Select, InputLabel } from '@material-ui/core'
 import { connect } from 'react-redux'
 import { useState } from 'react'
-import produce from 'immer'
+// import produce from 'immer'
 import api from '../Api'
 function UserProfileForm ({ userId }) {
+  console.log(userId, '................')
   const [state, setState] = useState({
     first_name: '',
     last_name: '',
     user_gender: '',
     user_dob: '',
     user_height: '',
-    user_weight: '',
-    isLoading: true
+    user_weight: ''
   })
 
   const onStartTransform = (data) => {
-    setState(produce(draftState => {
-      draftState.isLoading = false
-    }))
+    setState(data)
     return data
   }
   /*
@@ -53,9 +51,6 @@ function UserProfileForm ({ userId }) {
   const finalCommand = () => {
     console.log('hello')
     // TODO: update user info
-  }
-  if (state.isLoading) {
-    return <p>loading</p>
   }
   // TODO: decide if we should have password, address, exp level field
   return (
@@ -144,7 +139,7 @@ function UserProfileForm ({ userId }) {
   )
 }
 const mapState = (state) => {
-  return { userId: state.user.userData.id }
+  return { userId: state.user.id }
 }
 
 export default connect(mapState, null)(UserProfileForm)
