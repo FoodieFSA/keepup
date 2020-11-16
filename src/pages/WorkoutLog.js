@@ -6,7 +6,7 @@ import SingleExercise from '../Components/SingleExercise'
 const WorkoutLog = () => {
   const initialExercise = {
     exerciseName: 'Bench Press',
-    set: 1,
+    set: 0,
     LBS: 0,
     reps: 0,
     complete: false
@@ -17,56 +17,54 @@ const WorkoutLog = () => {
     exerciseSets: []
   })
 
-  const columnHeader = ['Exercise', 'Set', 'LBS', 'Reps', 'Complete']
-
   const handleExerciseChange = (
     exerciseId,
+    setId,
     incomingExerciseName,
     incomingSet,
     incomingLBS,
     incomingReps,
     incomingComplete
   ) => {
-    const tempExercise = state.exerciseSets[exerciseId]
-
+    const tempExercise = state.exerciseSets[exerciseId][setId]
     setState(
       produce((draftState) => {
-        draftState.exerciseSets[exerciseId].exerciseName =
+        draftState.exerciseSets[exerciseId][setId].exerciseName =
           incomingExerciseName || tempExercise.exerciseName
-        draftState.exerciseSets[exerciseId].set =
+        draftState.exerciseSets[exerciseId][setId].set =
           incomingSet || tempExercise.set
-        draftState.exerciseSets[exerciseId].LBS =
+        draftState.exerciseSets[exerciseId][setId].LBS =
           incomingLBS || tempExercise.LBS
-        draftState.exerciseSets[exerciseId].reps =
+        draftState.exerciseSets[exerciseId][setId].reps =
           incomingReps || tempExercise.reps
-        draftState.exerciseSets[exerciseId].complete =
+        draftState.exerciseSets[exerciseId][setId].complete =
           incomingComplete === null ? tempExercise.complete : incomingComplete
       })
     )
   }
 
+  // TODO need the remove exercise function and remove set function
   const addNewExercise = () => {
     setState(
       produce((draftState) => {
-        draftState.exerciseSets.push({ ...initialExercise })
+        draftState.exerciseSets.push([{ ...initialExercise }])
+      })
+    )
+  }
+  const addNewSet = (exerciseIndex, prevSetNum = 0) => {
+    const tempSet = { ...initialExercise }
+    tempSet.set = prevSetNum
+    setState(
+      produce((draftState) => {
+        draftState.exerciseSets[exerciseIndex].push({ ...tempSet })
       })
     )
   }
 
   return (
-    <>
+    <div style={{ flex: 1 }}>
       <h2 id="workoutlog-title">{state.workoutLogName}</h2>
-      <table id="table">
-        <thead>
-          <tr>
-            {columnHeader.map((columnName, index) => {
-              return <th key={index}>{columnName.toUpperCase()}</th>
-            })}
-          </tr>
-        </thead>
-
-        <tbody>
-          {state.exerciseSets &&
+      {state.exerciseSets &&
             state.exerciseSets.map((exercise, index) => {
               return (
                 <SingleExercise
@@ -74,16 +72,16 @@ const WorkoutLog = () => {
                   exerciseId={index}
                   exercise={exercise}
                   handleExerciseChange={handleExerciseChange}
+                  addNewSet={addNewSet}
                 />
               )
-            })}
-        </tbody>
-
-        <Button variant="contained" color="primary" onClick={addNewExercise}>
+            })
+      }
+      <Button variant="contained" color="primary" onClick={addNewExercise}>
           Add a New Exercise
-        </Button>
-      </table>
-    </>
+      </Button>
+
+    </div>
   )
 }
 

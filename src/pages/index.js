@@ -6,4 +6,4 @@ import UserProfile from './UserProfile'
 import UserProfileForm from './UserProfileForm'
 import WorkoutLog from './WorkoutLog'
 
-export {Home, LogIn, SignUp, Error, UserProfile, UserProfileForm, WorkoutLog}
+export { Home, LogIn, SignUp, Error, UserProfile, UserProfileForm, WorkoutLog }
