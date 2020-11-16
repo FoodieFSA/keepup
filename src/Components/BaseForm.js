@@ -84,7 +84,7 @@ export default (props) => {
   }
 
   useEffect(() => {
-    if (!isClear(props.id) && !isClear(props.externalApi)) {
+    if (!isClear(props.id) && !isClear(props.externalApi) && typeof props.externalApi.retrieveDocument === 'function') {
       props.externalApi
         .retrieveDocument(props.id)
         .then(

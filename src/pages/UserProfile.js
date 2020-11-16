@@ -1,59 +1,85 @@
 import { connect } from 'react-redux'
+import { isClear } from '../Components'
+import { Button } from '@material-ui/core'
 
 function UserProfile ({ user, history }) {
   const handleOnClick = () => {
     history.push('/user-profile-update')
   }
-
-  if (Object.keys(user).length === 0) {
-    history.push('/error')
+  if (isClear(user)) {
+    return <p>loading</p>
   }
-
-  const userData = user.userData
-
   return (
-    <div>
-      {Object.keys(user).length ? (
-        <div id="user-profile-page">
-          <div>
-            <h1> My Profile Page </h1>
-          </div>
-          <div>
-            <img
-              src="https://www.edmundsgovtech.com/wp-content/uploads/2020/01/default-picture_0_0.png"
-              style={{ height: '200px', width: '200px' }}
-            />
+    <div id="user-profile-page">
+      <h1> My Profile Page </h1>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center'
+        }}
+      >
+        <img
+          src="https://cdn.patch.com/assets/layout/contribute/user-default.png"
+          style={{
+            height: '400px',
+            width: '400px',
+            borderRadius: '50%'
+          }}
+        />
+        <div style={{ paddingTop: '40px' }}>
+          <div className="user-profile-info">
+            <h3>
+              <span>Name: </span>
+              {user.first_name + ' ' + user.last_name}
+            </h3>
           </div>
           <div className="user-profile-info">
-            <div>{userData.first_name || 'First Name Unavailable'}</div>
+            <h3>
+              <span>Email: </span>
+              {user.email || 'Email Unavailable'}
+            </h3>
           </div>
           <div className="user-profile-info">
-            <div>{userData.last_name || 'Last Name Unavailable'}</div>
+            <h3>
+              <span>DOB: </span>
+              {user.user_dob || 'Dob Unavailable'}
+            </h3>
           </div>
           <div className="user-profile-info">
-            <div>{userData.email || 'Email Unavailable'}</div>
+            <h3>
+              <span>Height: </span>
+              {user.user_height || 'Height Unavailable'}
+            </h3>
           </div>
           <div className="user-profile-info">
-            <div>{userData.user_dob || 'Dob Unavailable'}</div>
+            <h3>
+              <span>Weight: </span>
+              {user.user_weight || 'Weight Unavailable'}
+            </h3>
           </div>
           <div className="user-profile-info">
-            <div>{userData.user_height || 'Height Unavailable'}</div>
+            <h3>
+              <span>Gender: </span>
+              {user.user_gender || 'Height Unavailable'}
+            </h3>
           </div>
-          <div className="user-profile-info">
-            <div>{userData.user_weight || 'Weight Unavailable'}</div>
-          </div>
-          <div className="user-profile-info">
-            <div>{userData.user_gender || 'Height Unavailable'}</div>
-          </div>
-          <button onClick={() => handleOnClick()}>Update Profile</button>
+          <Button
+            style={{ marginLeft: '25px' }}
+            variant="contained"
+            color="primary"
+            onClick={handleOnClick}
+          >
+            Update Profile
+          </Button>
         </div>
-      ) : null}
+      </div>
     </div>
   )
 }
 
 const mapStateToProps = (state) => {
-  return { user: state.user }
+  return { user: state.user.userData }
 }
 
 export default connect(mapStateToProps, null)(UserProfile)

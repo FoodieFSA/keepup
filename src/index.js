@@ -4,16 +4,19 @@ import App from './App'
 import * as serviceWorker from './serviceWorker'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import store from './store'
+import { store, persistor } from './store'
 import Firebase, { FirebaseContext } from './firebase';
+import { PersistGate } from 'redux-persist/integration/react'
 
 ReactDOM.render(
   <Provider store={store}>
-    <FirebaseContext.Provider value={new Firebase()}>
-      <Router >
-        <App />
-      </Router>
-    </FirebaseContext.Provider>
+    <PersistGate loading={null} persistor={persistor}>
+      <FirebaseContext.Provider value={new Firebase()}>
+        <Router >
+          <App />
+        </Router>
+      </FirebaseContext.Provider>
+    </PersistGate>s
   </Provider>,
   document.getElementById('root')
 )
