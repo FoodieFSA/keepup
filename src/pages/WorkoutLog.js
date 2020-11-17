@@ -20,11 +20,8 @@ const WorkoutLog = () => {
     modalOpen: false,
   })
 
-  // const [open, setOpen] = useState(false)
-
-  const handleModal = () => {
-    console.log('OPEN')
-
+  const handleOpen = () => {
+    // console.log('OPEN')
     setState(
       produce((draftState) => {
         draftState.modalOpen = !state.modalOpen
@@ -93,11 +90,11 @@ const WorkoutLog = () => {
           )
         })}
 
-      <Button variant="contained" color="primary" onClick={handleModal}>
+      <Button variant="contained" color="primary" onClick={handleOpen}>
         Add a New Exercise
       </Button>
 
-      <ExerciseModal handleModal={handleModal} open={state.modalOpen} />
+      <ExerciseModal handleOpen={handleOpen} open={state.modalOpen} handleSubmit={addNewExercise}/>
     </div>
   )
 }

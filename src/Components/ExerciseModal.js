@@ -1,6 +1,17 @@
 import {useState} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
-import {Modal, Input, Backdrop, Fade, InputAdornment} from '@material-ui/core'
+import {
+  Modal,
+  Input,
+  Backdrop,
+  Fade,
+  InputAdornment,
+  RadioGroup,
+  Radio,
+  FormControl,
+  FormLabel,
+  FormControlLabel,
+} from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
 
 const dummyData = [
@@ -25,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const ExerciseModal = ({handleModal, open}) => {
+const ExerciseModal = ({handleOpen, open}) => {
   const classes = useStyles()
   const [searchResults, setSearchResults] = useState([])
   const [input, setInput] = useState('')
@@ -41,6 +52,7 @@ const ExerciseModal = ({handleModal, open}) => {
   const handleChange = (e) => {
     setInput(e.target.value)
     searchExercises(e.target.value)
+    console.log(input)
   }
 
   return (
@@ -49,7 +61,7 @@ const ExerciseModal = ({handleModal, open}) => {
       aria-describedby="transition-modal-description"
       className={classes.modal}
       open={open}
-      onClose={handleModal}
+      onClose={handleOpen}
       closeAfterTransition
       BackdropComponent={Backdrop}
       BackdropProps={{
@@ -58,9 +70,9 @@ const ExerciseModal = ({handleModal, open}) => {
     >
       <Fade in={open}>
         <div className={classes.paper}>
-          <h2 id="transition-modal-title">Pick an Exercise</h2>
+          <h2 id="modal-title">Pick an Exercise</h2>
           <Input
-            id="transition-modal-description"
+            id="search-input"
             value={input}
             onChange={handleChange}
             startAdornment={
@@ -69,10 +81,25 @@ const ExerciseModal = ({handleModal, open}) => {
               </InputAdornment>
             }
           />
-
-          {searchResults.map((result) => {
-            return <div key={result.id}>{result.name}</div>
-          })}
+          <RadioGroup
+            // aria-label="exercises"
+            // name="exercises"
+            value={input}
+            onChange={handleChange}
+          >
+            {searchResults.map((result) => {
+              return (
+                <FormControlLabel
+                  key={result.id}
+                  value={result.name}
+                  label={result.name}
+                  control={<Radio />}
+                >
+                  {result.name}
+                </FormControlLabel>
+              )
+            })}
+          </RadioGroup>
         </div>
       </Fade>
     </Modal>
