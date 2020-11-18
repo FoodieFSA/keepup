@@ -31,7 +31,8 @@ export const me = () => async (dispatch) => {
 export const auth = (payload, method) => async (dispatch) => {
   let res
   try {
-    res = await Api.post(`/auth/${method}`, payload)
+    const temp = { ...payload, grant_type: 'password' }
+    res = await Api.post(`/auth/${method}`, temp, { withCredentials: true })
   } catch (authError) {
     dispatch(getUser({ error: authError.response.data.error }))
     return throw new Error(authError.response.data.error)
