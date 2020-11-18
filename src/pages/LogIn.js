@@ -3,6 +3,8 @@ import BaseForm from '../Components/BaseForm'
 import AppTextField from '../Components/AppTextField'
 import { auth } from '../store'
 import { connect } from 'react-redux'
+import { useEffect } from 'react'
+import Api from '../Api'
 
 const Login = ({ loginUser, error, history }) => {
   const ValidationSchema = Yup.object({
@@ -15,7 +17,19 @@ const Login = ({ loginUser, error, history }) => {
       .required()
       .label('Password')
   })
-
+  useEffect(() => {
+    // Api.get('test').then(res => {
+    //   console.log(res)
+    // })
+    // Api.post('auth/refresh_token', null, {
+    //   withCredentials: true
+    // }).then(res => {
+    //   console.log(res.data.accessToken)
+    // })
+    Api.get('user/getUser').then(res => {
+      console.log(res)
+    })
+  })
   const finalCommand = () => history.push('/')
 
   return (

@@ -4,7 +4,7 @@ import Api from '../Api'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
-
+const REFRESH_TOKEN = ' REFRESH_TOKEN'
 /**
  * INITIAL STATE
  */
@@ -15,7 +15,7 @@ const defaultUser = { }
  */
 const getUser = (user) => ({ type: GET_USER, user })
 const removeUser = () => ({ type: REMOVE_USER })
-
+export const refreshUserToken = (user) => ({ type: REFRESH_TOKEN, user })
 /**
  * THUNK CREATORS
  */
@@ -30,9 +30,11 @@ export const me = () => async (dispatch) => {
 
 export const auth = (payload, method) => async (dispatch) => {
   let res
+
   try {
-    const temp = { ...payload, grant_type: 'password' }
-    res = await Api.post(`/auth/${method}`, temp, { withCredentials: true })
+    res = await Api.post(`/auth/${method}`, payload, {
+      withCredentials: true
+    })
   } catch (authError) {
     dispatch(getUser({ error: authError.response.data.error }))
     return throw new Error(authError.response.data.error)
@@ -64,6 +66,8 @@ export default function (state = defaultUser, action) {
       return action.user
     case REMOVE_USER:
       return defaultUser
+    case REFRESH_TOKEN:
+      return action.user
     default:
       return state
   }
