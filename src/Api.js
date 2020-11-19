@@ -41,7 +41,8 @@ api.interceptors.request.use(
     return config
   }, error => Promise.reject(error)
 )
-
+// https://medium.com/swlh/handling-access-and-refresh-tokens-using-axios-interceptors-3970b601a5da
+// https://gist.github.com/mkjiau/650013a99c341c9f23ca00ccb213db1c
 api.interceptors.response.use(response => response,
   async error => {
     const originalRequest = error.config;
@@ -77,5 +78,5 @@ api.interceptors.response.use(response => response,
     return Promise.reject(error)
   }
 )
-// for call the apis in backend
+
 export default api
