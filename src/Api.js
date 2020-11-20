@@ -3,6 +3,7 @@ import { serverUrl } from '../env.json'
 // import moment from 'moment'
 import { isClear } from './Components'
 import { store, refreshUserToken } from './store'
+import history from './history'
 
 const api = axios.create({
   baseURL: serverUrl
@@ -46,7 +47,6 @@ api.interceptors.request.use(
 api.interceptors.response.use(response => response,
   async error => {
     const originalRequest = error.config;
-
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
@@ -56,24 +56,28 @@ api.interceptors.response.use(response => response,
         return Promise.reject(error);
       }
 
-      const tokenResponse = await axios.post(`${serverUrl}/auth/refresh_token`, null,
-        {
-          withCredentials: true
-        })
+      axios.post(`${serverUrl}/auth/refresh_token`, null, { withCredentials: true }).then(response => {
+        const tokenInfo = response.data
+        if (isClear(tokenInfo.accessToken)) {
+          history.push('/login')
+          return Promise.reject(error);
+        }
+        const refreshUser = {
+          accessToken: tokenInfo.accessToken,
+          tokenType: tokenInfo.tokenType,
+          expiresIn: tokenInfo.expiresIn,
+          id: userInfo.id,
+          userType: userInfo.userType,
+          userData: userInfo.userData
+        }
+        store.dispatch(refreshUserToken(refreshUser))
 
-      const tokenInfo = tokenResponse.data
-      const refreshUser = {
-        accessToken: tokenInfo.accessToken,
-        tokenType: tokenInfo.tokenType,
-        expiresIn: tokenInfo.expiresIn,
-        id: userInfo.id,
-        userType: userInfo.userType,
-        userData: userInfo.userData
-      }
-      store.dispatch(refreshUserToken(refreshUser))
-
-      originalRequest.headers.Authorization = 'Bearer ' + tokenInfo.accessToken
-      return new Promise((resolve) => resolve(axios(originalRequest)))
+        originalRequest.headers.Authorization = tokenInfo.tokenType + ' ' + tokenInfo.accessToken
+        return new Promise((resolve) => resolve(axios(originalRequest)))
+      }).catch(error => {
+        console.log(error)
+        history.push('/login')
+      })
     }
     return Promise.reject(error)
   }
