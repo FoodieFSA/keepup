@@ -1,5 +1,5 @@
-import {useState} from 'react'
-import {makeStyles} from '@material-ui/core/styles'
+import { useState } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
 import {
   Modal,
   Input,
@@ -9,46 +9,44 @@ import {
   RadioGroup,
   Radio,
   Button,
-  FormControl,
-  FormLabel,
-  FormControlLabel,
+  FormControlLabel
 } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
 import produce from 'immer'
 
 const dummyData = [
-  {id: 0, body_part: 'Chest', name: 'Bench Press'},
-  {id: 1, body_part: 'Back', name: 'Deadlift'},
-  {id: 2, body_part: 'Shoulders', name: 'Lateral Raises'},
-  {id: 3, body_part: 'Legs', name: 'Barbell Back Squat'},
-  {id: 4, body_part: 'Biceps', name: 'Dumbbell Curls'},
+  { id: 0, body_part: 'Chest', name: 'Bench Press' },
+  { id: 1, body_part: 'Back', name: 'Deadlift' },
+  { id: 2, body_part: 'Shoulders', name: 'Lateral Raises' },
+  { id: 3, body_part: 'Legs', name: 'Barbell Back Squat' },
+  { id: 4, body_part: 'Biceps', name: 'Dumbbell Curls' }
 ]
 
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
+    padding: theme.spacing(2, 4, 3)
+  }
   // button: {
   //   backgroundColor: 'green',
   //   color: 'white',
   // },
 }))
 
-const ExerciseModal = ({handleOpen, open, handleSubmit}) => {
+const ExerciseModal = ({ handleOpen, open, handleSubmit }) => {
   const classes = useStyles()
 
   const [state, setState] = useState({
     searchResults: [...dummyData],
     searchInput: '',
-    selectedExercise: '',
+    selectedExercise: ''
   })
 
   const searchExercises = (input) => {
@@ -98,7 +96,7 @@ const ExerciseModal = ({handleOpen, open, handleSubmit}) => {
       closeAfterTransition
       BackdropComponent={Backdrop}
       BackdropProps={{
-        timeout: 500,
+        timeout: 500
       }}
     >
       <Fade in={open}>
