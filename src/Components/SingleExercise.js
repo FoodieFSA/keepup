@@ -33,6 +33,10 @@ const SingleExercise = ({ exercise, handleExerciseChange, exerciseId, addNewSet 
                     inputProps={{ 'aria-label': 'secondary checkbox' }}
                   />
                 </td>
+                <td>
+                  {/* onclick that deletes this set from the exercise array */}
+                  <button >Delete Set</button>
+                </td>
               </tr>
             })
           }

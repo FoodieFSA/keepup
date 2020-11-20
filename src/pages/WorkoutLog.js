@@ -1,9 +1,9 @@
-import {useState} from 'react'
-import {Button} from '@material-ui/core'
+import { useState } from 'react'
+import { Button } from '@material-ui/core'
 import produce from 'immer'
 import SingleExercise from '../Components/SingleExercise'
 import ExerciseModal from '../Components/ExerciseModal'
-import persistCombineReducers from 'redux-persist/es/persistCombineReducers'
+// import persistCombineReducers from 'redux-persist/es/persistCombineReducers'
 
 const WorkoutLog = () => {
   const initialExercise = {
@@ -11,13 +11,13 @@ const WorkoutLog = () => {
     set: 0,
     LBS: 0,
     reps: 0,
-    complete: false,
+    complete: false
   }
 
   const [state, setState] = useState({
     workoutLogName: 'MONDAY WORKOUT',
     exerciseSets: [],
-    modalOpen: false,
+    modalOpen: false
   })
 
   const handleOpen = () => {
@@ -60,22 +60,41 @@ const WorkoutLog = () => {
     console.log('STATE', state)
     setState(
       produce((draftState) => {
-        draftState.exerciseSets.push([{...initialExercise}])
+        draftState.exerciseSets.push([{ ...initialExercise }])
       })
     )
   }
   const addNewSet = (exerciseIndex, prevSetNum = 0) => {
-    const tempSet = {...initialExercise}
+    const tempSet = { ...initialExercise }
     tempSet.set = prevSetNum
     setState(
       produce((draftState) => {
-        draftState.exerciseSets[exerciseIndex].push({...tempSet})
+        draftState.exerciseSets[exerciseIndex].push({ ...tempSet })
+      })
+    )
+  }
+  /*
+  @param indexSet int
+  @param indexExercise int
+  */
+  const deleteSet = (setIndex, exerciseIndex) => {
+    setState(
+      produce((draftState) => {
+        draftState.exerciseSets[exerciseIndex].filter((set, index) => index !== setIndex)
       })
     )
   }
 
+  /*
+  array[indexExercise] -> {id, name, sets: [singlesSet{}]}
+                                            sets[indexSet]->singleSet{sds:sdsdsd}
+  exercises [ singleExercise {id, name, sets [singlesSet{}]}]
+
+  exercises [ sets[singlesSet[{},{}]]]
+  */
+
   return (
-    <div style={{flex: 1}}>
+    <div style={{ flex: 1 }}>
       <h2 id="workoutlog-title">{state.workoutLogName}</h2>
       {state.exerciseSets &&
         state.exerciseSets.map((exercise, index) => {
@@ -86,11 +105,12 @@ const WorkoutLog = () => {
               exercise={exercise}
               handleExerciseChange={handleExerciseChange}
               addNewSet={addNewSet}
+              deleteSet={deleteSet}
             />
           )
         })}
 
-      <Button variant="contained" color="primary" onClick={handleOpen}>
+      <Button variant="contained" color="primary" onClick={addNewExercise}>
         Add a New Exercise
       </Button>
 

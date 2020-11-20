@@ -1,5 +1,5 @@
-import {useState} from 'react'
-import {makeStyles} from '@material-ui/core/styles'
+import { useState } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
 import {
   Modal,
   Input,
@@ -8,35 +8,35 @@ import {
   InputAdornment,
   RadioGroup,
   Radio,
-  FormControl,
-  FormLabel,
-  FormControlLabel,
+  // FormControl,
+  // FormLabel,
+  FormControlLabel
 } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
 
 const dummyData = [
-  {id: 0, body_part: 'Chest', name: 'Bench Press'},
-  {id: 1, body_part: 'Back', name: 'Deadlift'},
-  {id: 2, body_part: 'Shoulders', name: 'Lateral Raises'},
-  {id: 3, body_part: 'Legs', name: 'Barbell Back Squat'},
-  {id: 4, body_part: 'Biceps', name: 'Dumbbell Curls'},
+  { id: 0, body_part: 'Chest', name: 'Bench Press' },
+  { id: 1, body_part: 'Back', name: 'Deadlift' },
+  { id: 2, body_part: 'Shoulders', name: 'Lateral Raises' },
+  { id: 3, body_part: 'Legs', name: 'Barbell Back Squat' },
+  { id: 4, body_part: 'Biceps', name: 'Dumbbell Curls' }
 ]
 
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
+    padding: theme.spacing(2, 4, 3)
+  }
 }))
 
-const ExerciseModal = ({handleOpen, open}) => {
+const ExerciseModal = ({ handleOpen, open }) => {
   const classes = useStyles()
   const [searchResults, setSearchResults] = useState([])
   const [input, setInput] = useState('')
@@ -65,7 +65,7 @@ const ExerciseModal = ({handleOpen, open}) => {
       closeAfterTransition
       BackdropComponent={Backdrop}
       BackdropProps={{
-        timeout: 500,
+        timeout: 500
       }}
     >
       <Fade in={open}>
