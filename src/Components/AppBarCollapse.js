@@ -10,6 +10,7 @@ import ButtonAppBarCollapse from './ButtonAppBarCollapse'
 import { Link } from 'react-router-dom'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import { connect } from 'react-redux'
+import { logout } from '../store'
 
 const styles = (theme) => ({
   root: {
@@ -29,7 +30,7 @@ const styles = (theme) => ({
   }
 })
 
-const AppBarCollapse = ({ classes, isLoggedIn }) => {
+const AppBarCollapse = ({ classes, isLoggedIn, logout }) => {
   // TODO use the isLoggedIn to display different Link
   console.log('user is logging: ', isLoggedIn)
   return (
@@ -38,6 +39,7 @@ const AppBarCollapse = ({ classes, isLoggedIn }) => {
         <Link to="/user-profile">
           <MenuItem>Profile</MenuItem>
         </Link>
+        <MenuItem onClick={logout} >Log Out</MenuItem>
         <Link to="/login">
           <MenuItem>Login</MenuItem>
         </Link>
@@ -63,12 +65,14 @@ const AppBarCollapse = ({ classes, isLoggedIn }) => {
         <Link to="/user-profile">
           <Button color="inherit">Profile</Button>
         </Link>
+        <Button color="inherit" style={{ color: 'black' }} onClick={logout}>Log Out</Button>
         <Link to="/login">
           <Button color="inherit">Login</Button>
         </Link>
         <Link to="/signup">
           <Button color="inherit">Signup</Button>
         </Link>
+
       </div>
     </div>
   )
@@ -78,4 +82,10 @@ const mapState = (state) => {
     isLoggedIn: !!state.user.id
   }
 }
-export default connect(mapState, null)(withStyles(styles)(AppBarCollapse))
+
+const mapDispatch = (dispatch) => {
+  return {
+    logout: () => dispatch(logout())
+  }
+}
+export default connect(mapState, mapDispatch)(withStyles(styles)(AppBarCollapse))

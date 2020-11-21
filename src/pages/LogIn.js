@@ -4,7 +4,7 @@ import AppTextField from '../Components/AppTextField'
 import { auth } from '../store'
 import { connect } from 'react-redux'
 import { useEffect } from 'react'
-import Api from '../Api'
+// import Api from '../Api'
 
 const Login = ({ loginUser, error, history }) => {
   const ValidationSchema = Yup.object({
@@ -26,9 +26,9 @@ const Login = ({ loginUser, error, history }) => {
     // }).then(res => {
     //   console.log(res.data.accessToken)
     // })
-    Api.get('user/getUser').then(res => {
-      console.log(res)
-    })
+    // Api.get('user/getUser').then(res => {
+    //   console.log(res)
+    // })
   })
   const finalCommand = () => history.push('/')
 

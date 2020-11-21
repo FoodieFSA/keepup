@@ -47,7 +47,8 @@ api.interceptors.request.use(
 api.interceptors.response.use(response => response,
   async error => {
     const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry) {
+    console.log(originalRequest.url)
+    if (error.response.status === 401 && !originalRequest._retry && originalRequest !== '/auth/logout') {
       originalRequest._retry = true;
 
       const userInfo = store.getState().user
