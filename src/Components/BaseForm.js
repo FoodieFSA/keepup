@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Button } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { Button, makeStyles, Modal, CircularProgress } from '@material-ui/core'
 import { isClear, HandleError } from './index'
 import { Formik } from 'formik'
 import _ from 'lodash'
@@ -17,16 +16,27 @@ const useStyles = makeStyles((theme) => ({
     border: '2px solid #000',
     padding: '20px',
     outline: 'none'
+  },
+  loadingPaper: {
+    position: 'absolute',
+    display: 'flex',
+    justifyContent: 'center',
+    padding: '20px',
+    margin: '20px',
+    alignItems: 'center'
   }
 }))
 
 export default (props) => {
   const [state, setState] = useState({})
   const classes = useStyles()
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = (useValue, formActions) => {
+    setLoading(true)
     const finalRedirect = (id) => {
       if (typeof props.finalCommand === 'function') {
+        setLoading(false)
         props.finalCommand(id)
       }
     }
@@ -128,29 +138,40 @@ export default (props) => {
     return <p>Error</p>
   } else if (state.dataMode === 'insert' || state.dataMode === 'update') {
     return (
-      <Formik
-        initialValues={state}
-        validationSchema={props.validationSchema}
-        // validate={props.validate}
-        validateOnChange={!props.fastValidation}
-        validateOnBlur={!props.fastValidation}
-        onSubmit={handleSubmit}
-      >
-        {(formProps) => (
-          <form className="form-container" autoComplete="off">
-            {props.children(formProps)}
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
-              type="submit"
-              onClick={formProps.handleSubmit}
-            >
-              {props.buttonText}
-            </Button>
-          </form>
-        )}
-      </Formik>
+      <>
+        <Formik
+          initialValues={state}
+          validationSchema={props.validationSchema}
+          // validate={props.validate}
+          validateOnChange={!props.fastValidation}
+          validateOnBlur={!props.fastValidation}
+          onSubmit={handleSubmit}
+        >
+          {(formProps) => (
+            <form className="form-container" autoComplete="off">
+              {props.children(formProps)}
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                type="submit"
+                onClick={formProps.handleSubmit}
+              >
+                {props.buttonText}
+              </Button>
+            </form>
+          )}
+        </Formik>
+        <Modal
+          open={loading}
+          onClose={() => setLoading(false)}
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+          className={classes.loadingPaper}
+        >
+          <CircularProgress color="secondary" style={{ padding: '20px', boarderWidth: '0px', borderStyle: 'none' }}/>
+        </Modal>
+      </>
     )
   } else {
     return <p>loading</p>
