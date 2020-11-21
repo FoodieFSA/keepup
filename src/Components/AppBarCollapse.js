@@ -31,48 +31,54 @@ const styles = (theme) => ({
 })
 
 const AppBarCollapse = ({ classes, isLoggedIn, logout }) => {
-  // TODO use the isLoggedIn to display different Link
   console.log('user is logging: ', isLoggedIn)
   return (
     <div className={classes.root}>
       <ButtonAppBarCollapse>
-        <Link to="/user-profile">
-          <MenuItem>Profile</MenuItem>
-        </Link>
-        <MenuItem onClick={logout} >Log Out</MenuItem>
-        <Link to="/login">
-          <MenuItem>Login</MenuItem>
-        </Link>
-        <Link to="/signup">
-          <MenuItem>Signup</MenuItem>
-        </Link>
-        <Link to="/workout-log">
-          <Button color="inherit">
-            <AddCircleOutlineIcon />
-            Add Workout Log
-          </Button>
-        </Link>
+        {
+          isLoggedIn
+            ? <div>
+              <Link to="/user-profile">
+                <MenuItem>Profile</MenuItem>
+              </Link>
+              <Link to="/workout-log">
+                <Button color="inherit">
+                  <AddCircleOutlineIcon />
+                  Add Workout Log
+                </Button>
+              </Link>
+              <MenuItem onClick={logout} >Log Out</MenuItem>
+            </div> : <div>
+              <Link to="/login">
+                <MenuItem>Login</MenuItem>
+              </Link>
+              <Link to="/signup">
+                <MenuItem>Signup</MenuItem>
+              </Link>
+            </div>
+        }
       </ButtonAppBarCollapse>
       <div className={classes.buttonBar} id="appbar-collapse">
-        {/* TODO using react-router to click on the button for the form */}
-        <Link to="/workout-log">
-          <Button color="inherit">
-            <AddCircleOutlineIcon />
-            Add Workout Log
-          </Button>
-        </Link>
-
-        <Link to="/user-profile">
-          <Button color="inherit">Profile</Button>
-        </Link>
-        <Button color="inherit" style={{ color: 'black' }} onClick={logout}>Log Out</Button>
-        <Link to="/login">
-          <Button color="inherit">Login</Button>
-        </Link>
-        <Link to="/signup">
-          <Button color="inherit">Signup</Button>
-        </Link>
-
+        {isLoggedIn ? <div>
+          <Link to="/workout-log">
+            <Button color="inherit">
+              <AddCircleOutlineIcon />
+                Add Workout Log
+            </Button>
+          </Link>
+          <Link to="/user-profile">
+            <Button color="inherit">Profile</Button>
+          </Link>
+          <Button color="inherit" style={{ color: 'black' }} onClick={logout}>Log Out</Button>
+        </div> : <div>
+          <Link to="/login">
+            <Button color="inherit">Login</Button>
+          </Link>
+          <Link to="/signup">
+            <Button color="inherit">Signup</Button>
+          </Link>
+        </div>
+        }
       </div>
     </div>
   )

@@ -1,9 +1,5 @@
 import { connect } from 'react-redux'
-// import Api from '../Api'
 const Home = ({ user }) => {
-  // Api.get('user/getUser').then(res => {
-  //   console.log(res)
-  // })
   return (
     <div style={{ flex: 1 }}>
       <h1>Home</h1>

@@ -36,7 +36,6 @@ export const auth = (payload, method) => async (dispatch) => {
     res = await Api.post(`/auth/${method}`, payload, {
       withCredentials: true
     })
-    console.log(res)
   } catch (authError) {
     dispatch(getUser({ error: authError.response.data.error }))
     return throw new Error(authError.response.data.error)
@@ -52,7 +51,6 @@ export const auth = (payload, method) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   Api.post('/auth/logout').then(response => {
     const { data } = response
-    console.log(response)
     if (data.isLoggedOut) {
       dispatch(removeUser())
       history.push('/login')

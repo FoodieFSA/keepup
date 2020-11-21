@@ -1,9 +1,9 @@
 import axios from 'axios'
-import { serverUrl } from '../env.json'
 // import moment from 'moment'
 import { isClear } from './Components'
 import { store, refreshUserToken } from './store'
 import history from './history'
+const serverUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api' : 'https://backupfsa.herokuapp.com/api'
 
 const api = axios.create({
   baseURL: serverUrl
@@ -48,7 +48,7 @@ api.interceptors.response.use(response => response,
   async error => {
     const originalRequest = error.config;
     console.log(originalRequest.url)
-    if (error.response.status === 401 && !originalRequest._retry && originalRequest !== '/auth/logout') {
+    if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
       const userInfo = store.getState().user
