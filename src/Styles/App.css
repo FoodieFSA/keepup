@@ -5,6 +5,7 @@ a {
 
 body {
   font-family: 'Raleway', sans-serif;
+  flex-grow: 1;
 }
 
 /* Added some CSS here to make footer sticky. Can delete this if Mark was already working on a solution */
@@ -41,6 +42,10 @@ body {
   color: #61dafb;
 }
 
+.navbarLink {
+  display: flex;
+  flex-direction: column;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -118,7 +123,8 @@ body {
 
 #table {
   border-collapse: collapse;
-  border: 3x solid #ddd;
+  border: 3px solid #ddd;
+  width: 100%;
 }
 
 #table td,

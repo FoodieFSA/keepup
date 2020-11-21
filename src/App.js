@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import './Styles/App.css'
 import Footer from './Components/Footer'
-import NavBar from './Components/NavBar'
-import Routes from './routes'
+import NavBar from './Navigation/NavBar'
+import Routes from './Navigation/routes'
 import Api from './Api'
 
 function App () {

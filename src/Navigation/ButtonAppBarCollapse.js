@@ -37,6 +37,7 @@ const ButtonAppBarCollapse = ({ classes, children }) => {
         }}
         open={open}
         onClose={handleClose}
+        onClick={handleClose}
       >
         {children}
       </Menu>
