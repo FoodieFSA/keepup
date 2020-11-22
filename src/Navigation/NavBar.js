@@ -34,7 +34,7 @@ const NavBar = () => {
         <Toolbar>
           <Link to="/">
             <Typography variant='h3' className={classes.title}>
-              KeepUpssssss
+              KeepUp
             </Typography>
           </Link>
           <AppBarCollapse />

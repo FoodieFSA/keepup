@@ -71,17 +71,15 @@ const AppBarCollapse = ({ classes, isLoggedIn, logout }) => {
                 <ListItemText primary="My Profile" />
               </StyledMenuItem>
             </Link>
-            {/* Todo add a logout routes */}
-            <Link to="/user-profile">
-              <StyledMenuItem>
-                <ListItemIcon>
-                  <ExitToAppIcon />
-                </ListItemIcon>
-                <ListItemText primary="Sign Out" />
-              </StyledMenuItem>
-            </Link>
+            <StyledMenuItem onClick={logout}>
+              <ListItemIcon>
+                <ExitToAppIcon />
+              </ListItemIcon>
+              <ListItemText primary="Sign Out" />
+            </StyledMenuItem>
           </div>
           : <div className='navbarLink' >
+            {/* for the buttons not required user to login,place inside */}
             <Link to="/login">
               <StyledMenuItem>
                 <ListItemIcon>

@@ -3,8 +3,8 @@ import axios from 'axios'
 import { isClear } from './Components'
 import { store, refreshUserToken } from './store'
 import history from './history'
+
 const serverUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api/' : 'https://backupfsa.herokuapp.com/api/'
-// const serverUrl = 'https://da200981efce.ngrok.io/api/'
 const api = axios.create({
   baseURL: serverUrl
 })
