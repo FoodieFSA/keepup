@@ -16,6 +16,7 @@ import { withStyles } from '@material-ui/core/styles'
 import ButtonAppBarCollapse from './ButtonAppBarCollapse'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { logout } from '../store'
 
 const styles = (theme) => ({
   root: {
@@ -45,7 +46,7 @@ const StyledMenuItem = withStyles((theme) => ({
     }
   }
 }))(MenuItem);
-const AppBarCollapse = ({ classes, isLoggedIn }) => {
+const AppBarCollapse = ({ classes, isLoggedIn, logout }) => {
   // TODO use the isLoggedIn to display different Link
   console.log('user is logging: ', isLoggedIn)
   return (
@@ -70,17 +71,15 @@ const AppBarCollapse = ({ classes, isLoggedIn }) => {
                 <ListItemText primary="My Profile" />
               </StyledMenuItem>
             </Link>
-            {/* Todo add a logout routes */}
-            <Link to="/user-profile">
-              <StyledMenuItem>
-                <ListItemIcon>
-                  <ExitToAppIcon />
-                </ListItemIcon>
-                <ListItemText primary="Sign Out" />
-              </StyledMenuItem>
-            </Link>
+            <StyledMenuItem onClick={logout}>
+              <ListItemIcon>
+                <ExitToAppIcon />
+              </ListItemIcon>
+              <ListItemText primary="Sign Out" />
+            </StyledMenuItem>
           </div>
           : <div className='navbarLink' >
+            {/* for the buttons not required user to login,place inside */}
             <Link to="/login">
               <StyledMenuItem>
                 <ListItemIcon>
@@ -109,10 +108,7 @@ const AppBarCollapse = ({ classes, isLoggedIn }) => {
             <Link to="/user-profile">
               <Button color="inherit">My Profile</Button>
             </Link>
-            {/* Todo add a logout routes */}
-            <Link to="/workout-log">
-              <Button color="inherit">Sign Out</Button>
-            </Link>
+            <Button color="inherit" style={{ color: 'black' }} onClick={logout}>Log Out</Button>
           </> : <>
             <Link to="/login">
               <Button color="inherit">Login</Button>
@@ -131,4 +127,9 @@ const mapState = (state) => {
     isLoggedIn: !!state.user.id
   }
 }
-export default connect(mapState, null)(withStyles(styles)(AppBarCollapse))
+const mapDispatch = (dispatch) => {
+  return {
+    logout: () => dispatch(logout())
+  }
+}
+export default connect(mapState, mapDispatch)(withStyles(styles)(AppBarCollapse))

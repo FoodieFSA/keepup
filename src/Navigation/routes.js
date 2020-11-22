@@ -1,8 +1,8 @@
 import { withRouter, Route, Switch } from 'react-router-dom'
 import { SignUp, LogIn, Home, Error, UserProfile, UserProfileForm, WorkoutLog } from '../pages'
 import { connect } from 'react-redux'
+
 function Router ({ isLoggedIn, location }) {
-  console.log(isLoggedIn, location)
   // TODO  use the IsLoggedIn to restrict user for different route
   return (
     <Switch>
