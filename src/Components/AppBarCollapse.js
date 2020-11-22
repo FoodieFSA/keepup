@@ -31,7 +31,7 @@ const styles = (theme) => ({
 })
 
 const AppBarCollapse = ({ classes, isLoggedIn, logout }) => {
-  console.log('user is logging: ', isLoggedIn)
+  console.log('user is ddddddd: ', isLoggedIn)
   return (
     <div className={classes.root}>
       <ButtonAppBarCollapse>
@@ -55,6 +55,7 @@ const AppBarCollapse = ({ classes, isLoggedIn, logout }) => {
               <Link to="/signup">
                 <MenuItem>Signup</MenuItem>
               </Link>
+              <MenuItem onClick={logout} >Log Out</MenuItem>
             </div>
         }
       </ButtonAppBarCollapse>
@@ -69,7 +70,7 @@ const AppBarCollapse = ({ classes, isLoggedIn, logout }) => {
           <Link to="/user-profile">
             <Button color="inherit">Profile</Button>
           </Link>
-          <Button color="inherit" style={{ color: 'black' }} onClick={logout}>Log Out</Button>
+          <Button color="inherit" style={{ color: 'red' }} onClick={logout}>Log Out</Button>
         </div> : <div>
           <Link to="/login">
             <Button color="inherit">Login</Button>
@@ -77,6 +78,7 @@ const AppBarCollapse = ({ classes, isLoggedIn, logout }) => {
           <Link to="/signup">
             <Button color="inherit">Signup</Button>
           </Link>
+          <Button color="inherit" style={{ color: 'red' }} onClick={logout}>Log Out</Button>
         </div>
         }
       </div>

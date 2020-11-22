@@ -5,6 +5,7 @@ import { auth } from '../store'
 import { connect } from 'react-redux'
 
 const Login = ({ loginUser, error, history }) => {
+  console.log(loginUser, 'login function')
   const ValidationSchema = Yup.object({
     email: Yup.string()
       .email('Invalid email address')
