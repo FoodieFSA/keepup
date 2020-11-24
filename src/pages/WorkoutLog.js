@@ -3,7 +3,6 @@ import { Button } from '@material-ui/core'
 import produce from 'immer'
 import SingleExercise from '../Components/SingleExercise'
 import ExerciseModal from '../Components/ExerciseModal'
-// import persistCombineReducers from 'redux-persist/es/persistCombineReducers'
 
 const WorkoutLog = () => {
   const initialExercise = {
@@ -20,8 +19,8 @@ const WorkoutLog = () => {
     modalOpen: false
   })
 
+  // Modal logic
   const handleOpen = () => {
-    // console.log('OPEN')
     setState(
       produce((draftState) => {
         draftState.modalOpen = !state.modalOpen
@@ -56,13 +55,16 @@ const WorkoutLog = () => {
   }
 
   // TODO need the remove exercise function and remove set function
-  const addNewExercise = () => {
+  // Adds the new exercise and closes the modal after
+  const handleSubmit = () => {
     console.log('STATE', state)
     setState(
       produce((draftState) => {
         draftState.exerciseSets.push([{ ...initialExercise }])
       })
     )
+
+    handleOpen()
   }
   const addNewSet = (exerciseIndex, prevSetNum = 0) => {
     const tempSet = { ...initialExercise }
@@ -110,11 +112,15 @@ const WorkoutLog = () => {
           )
         })}
 
-      <Button variant="contained" color="primary" onClick={addNewExercise}>
+      <Button variant="contained" color="primary" /* onClick={/*addNewExercise} */>
         Add a New Exercise
       </Button>
 
-      <ExerciseModal handleOpen={handleOpen} open={state.modalOpen} handleSubmit={addNewExercise}/>
+      <ExerciseModal
+        handleOpen={handleOpen}
+        open={state.modalOpen}
+        handleSubmit={handleSubmit}
+      />
     </div>
   )
 }
