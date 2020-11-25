@@ -2,14 +2,14 @@ import Api from '../Api'
 /**
  * ACTION TYPES
  */
-const GET_WORKOUTS = 'GET_WORKOUTS'
-const CREATE_WORKOUT = 'CREATE_WORKOUT'
-const CREATE_EXERCISE = 'CREATE_EXERCISE'
-const REMOVE_EXERCISE = 'REMOVE_EXERCISE'
-const ADD_SET = 'ADD_SET'
-const UPDATE_SET = 'UPDATE_SET'
-const REMOVE_SET = 'REMOVE_SET'
-// const SAVE = "SAVE"
+const GOT_WORKOUTS = 'GOT_WORKOUTS'
+const CREATED_WORKOUT = 'CREATED_WORKOUT'
+const ADDED_EXERCISE = 'ADDED_EXERCISE'
+const REMOVED_EXERCISE = 'REMOVED_EXERCISE'
+const ADDED_SET = 'ADDED_SET'
+const UPDATED_SET = 'UPDATED_SET'
+const REMOVED_SET = 'REMOVED_SET'
+// const SAVED = "SAVED"
 
 /**
  * INITIAL STATE
@@ -19,7 +19,7 @@ const initialStateWorkout = {
 
   // TODO: use moment to name workoutlogname today's date
   workoutLogName: '', // day of month    DATE.NOW()
-
+  userId: '',
   // adding exercise objects into the exercises array
   exercises: []
   // modalOpen: false,
@@ -34,13 +34,13 @@ const emptySet = { lbs: 0, rep: 0, completeStatus: false }
 //   sets: [{lbs: 0, rep: 0, completeStatus: false}],
 // }
 
-const getWorkout = (workout) => ({ type: GET_WORKOUTS, workout })
-const createWorkout = () => ({ type: CREATE_WORKOUT })
-// const createExercise = (exercise) => ({type: CREATE_EXERCISE, exercise})
-// const removeExercise = (id) => ({type: REMOVE_EXERCISE, id})
-// const addSet = (exerciseId) => ({ type: ADD_SET, exerciseId})
-// const removeSet = (exercise, set) => ({ type: REMOVE_SET})
-// const updateSet = (exercise, set) => ({ type: UPDATE_SET, set})
+const gotWorkoutLog = (workout) => ({ type: GOT_WORKOUTS, workout })
+const createdWorkout = (workout) => ({ type: CREATED_WORKOUT, workout })
+const addedExercise = (exercise) => ({ type: ADDED_EXERCISE, exercise })
+const removedExercise = (id) => ({ type: REMOVED_EXERCISE, id })
+const addedSet = (exerciseId) => ({ type: ADDED_SET, exerciseId })
+// const removeSet = (exercise, set) => ({ type: REMOVED_SET})
+// const updateSet = (exercise, set) => ({ type: UPDATED_SET, set})
 
 /*
 
@@ -57,55 +57,113 @@ TODO:
  */
 
 // thunk to get workout log, we are assuming user has field for an array of workoutlogs
-export const getWorkoutLog = (logId) => async (dispatch) => {
+export const getWorkoutLog = (logId, userId) => async (dispatch) => {
   try {
     // TODO: add workoutLogs field to user, and get the log id response
-    if (logId) {
-      const response = await Api.get(`/workoutlog/${logId}`)
-      if (response) {
-        getWorkout(response.data)
+    const response = await Api.get(`/workoutlog/${logId}`)
+    if (response) {
+      const localWorkoutLog = JSON.parse(localStorage.getItem('workoutLog'))
+      if (localWorkoutLog.id === response.id) {
+        // Local Storage data has precedence over data base one. We just replace the one from the data base
+        gotWorkoutLog(localWorkoutLog)
       } else {
-        createWorkout()
-        // Create a local storage workout
+        gotWorkoutLog(response.data)
       }
+    } else {
+      const workoutLog = {
+        name: Date.now(), // Need more work to get the day only without time
+        userId: userId,
+        exercises: []
+      }
+      const response = await Api.post('/workoutlog/', workoutLog)
+      dispatch(createdWorkout(response.data))
+      // Create a local storage workout
+      // name, id, exercises
+      localStorage.setItem('workoutLog', JSON.stringify(response.data))
     }
   } catch (error) {
     console.log(error)
   }
 }
-
-// thunk to save changins of workoutlog to the backend
-export const save = () => async (dispatch) => {
+// add exercise to the workoutlog
+export const addExercise = (exercise) => async (dispatch) => {
   try {
-    // TODO: finish adding workoutlog id
-
-    await Api.put('/workoutLog/id')
-    dispatch(save())
+    const localWorkout = JSON.parse(localStorage.getItem('workoutLog'))
+    exercise.set[0] = emptySet
+    localWorkout.exercises.push(exercise)
+    localStorage.setItem('workoutLog', JSON.stringify(localWorkout))
+    dispatch(addedExercise(exercise))
   } catch (error) {
     console.error(error)
   }
 }
+
+export const removeExercise = (exerciseId) => async (dispatch) => {
+  try {
+    const localWorkout = JSON.parse(localStorage.getItem('workoutLog')).exercises.filter(exercise => exercise.id !== exerciseId)
+    localStorage.setItem('workoutLog', JSON.stringify(localWorkout))
+    dispatch(removedExercise(exerciseId))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+// const ADDED_SET = 'ADDED_SET'
+// const UPDATED_SET = 'UPDATED_SET'
+// const REMOVED_SET = 'REMOVED_SET'
+export const addSet = (exerciseId) => async (dispatch) => {
+  try {
+    const localWorkout = JSON.parse(localStorage.getItem('workoutLog')).exercises.map(exercise => {
+      if (exercise.id === exerciseId) {
+        exercise.set.push(emptySet)
+      }
+      return exercise
+    })
+    localStorage.setItem('workoutLog', JSON.stringify(localWorkout))
+    dispatch(addedSet(exerciseId))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+// Need to work on this one ran out of time
+// export const removeSet = (exerciseId) => async (dispatch) => {
+//   try {
+//     localStorage.setItem('workoutLog', JSON.stringify(localWorkout))
+//   } catch (error) {
+//     console.error(error)
+//   }
+// }
+//   try {
+//     // TODO: finish adding workoutlog id
+
+//     await Api.put('/workoutLog/id')
+//     dispatch(save())
+//   } catch (error) {
+//     console.error(error)
+//   }
+// }
 
 /**
  * REDUCER
  */
 export default function (state = initialStateWorkout, action) {
   switch (action.type) {
-    case GET_WORKOUTS:
+    case GOT_WORKOUTS:
       return action.workout
-    case CREATE_WORKOUT:
-      return state
-    case CREATE_EXERCISE:
+    case CREATED_WORKOUT:
+      return action.workout
+    case ADDED_EXERCISE:
       return { ...state, exercises: [...state.exercises, action.exercise] }
-    case REMOVE_EXERCISE:
+    case REMOVED_EXERCISE:
       return { ...state, exercises: state.exercises.filter(exercise => exercise.id !== action.id) }
-    case ADD_SET:
+    case ADDED_SET:
       return {
         ...state,
         exercises: state.exercises.map(exercise =>
           exercise.id === action.exerciseId ? exercise.sets.push(emptySet) : exercise)
       }
-    case UPDATE_SET:
+    case UPDATED_SET:
       return {
         ...state,
         exercises: state.exercises.map(exercise => {
@@ -115,7 +173,7 @@ export default function (state = initialStateWorkout, action) {
           return exercise
         })
       }
-    case REMOVE_SET:
+    case REMOVED_SET:
       return {
         ...state,
         exercises: state.exercises.map(exercise =>
