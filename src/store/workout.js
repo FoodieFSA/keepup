@@ -39,8 +39,8 @@ const createdWorkout = (workout) => ({ type: CREATED_WORKOUT, workout })
 const addedExercise = (exercise) => ({ type: ADDED_EXERCISE, exercise })
 const removedExercise = (id) => ({ type: REMOVED_EXERCISE, id })
 const addedSet = (exerciseId) => ({ type: ADDED_SET, exerciseId })
-// const removeSet = (exercise, set) => ({ type: REMOVED_SET})
-// const updateSet = (exercise, set) => ({ type: UPDATED_SET, set})
+const removedSet = (exerciseId, set) => ({ type: REMOVED_SET, exerciseId, set })
+const updatedSet = (exerciseId, set) => ({ type: UPDATED_SET, exerciseId, set })
 
 /*
 
@@ -126,14 +126,45 @@ export const addSet = (exerciseId) => async (dispatch) => {
   }
 }
 
+export const updateSet = (exerciseId, set) => async (dispatch) => {
+  try {
+    const localWorkout = JSON.parse(localStorage.getItem('workoutLog')).exercise.map(exercise => {
+      if (exercise.id === exerciseId) {
+        exercise.sets.map(currentSet => {
+          if (currentSet.id === set.id) {
+            return set
+          } else {
+            return currentSet
+          }
+        })
+      }
+      return exercise
+    })
+    localStorage.setItem('workoutLog', JSON.stringify(localWorkout))
+    dispatch(updatedSet(exerciseId, set))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 // Need to work on this one ran out of time
-// export const removeSet = (exerciseId) => async (dispatch) => {
-//   try {
-//     localStorage.setItem('workoutLog', JSON.stringify(localWorkout))
-//   } catch (error) {
-//     console.error(error)
-//   }
-// }
+export const removeSet = (exerciseId, set) => async (dispatch) => {
+  try {
+    const localWorkout = JSON.parse(localStorage.getItem('workoutLog')).exercise.map(exercise => {
+      if (exercise.id === exerciseId) {
+        exercise.sets.filter(currentSet => currentSet.id !== set.id)
+      }
+      return exercise
+    })
+    localStorage.setItem('workoutLog', JSON.stringify(localWorkout))
+    dispatch(removedSet(exerciseId, set))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+// thunk to save changins of workoutlog to the backend
+// export const save = () => async (dispatch) => {
 //   try {
 //     // TODO: finish adding workoutlog id
 
